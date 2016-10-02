@@ -29,11 +29,40 @@ module I18n
         tr = @translations[locale][key]?
         raise MissingTranslation.new(locale, key, options) unless tr
 
-        tr.to_s % options
+        if tr && (iter = options[:iter]?) && tr.is_a? Array(YAML::Type)
+          tr = tr[iter]
+        end
+
+        if options[:format]?
+          tr.to_s
+        else
+          tr.to_s % options
+        end
       end
 
-      def localize(locale : String, object, format = :default, **options) : String
-        ""
+      def localize(locale : String, object, scope = :number, **options) : String
+        base_key = "__formats__."
+
+        if object.is_a?(Time) && (scope == :time || scope == :date || scope == :datetime)
+
+          base_key += scope.to_s + ((format = options[:format]?) ? ".formats." + format.to_s : ".formats.default" )
+
+          format = translate(locale, base_key, format: true)
+          format = format.to_s.gsub(/%[aAbBpP]/) do |match|
+            case match
+              when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.to_i, format: true)
+              when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.to_i, format: true)
+              when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month, format: true)
+              when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month, format: true)
+              when "%p" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").upcase if object.responds_to? :hour
+              when "%P" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").downcase if object.responds_to? :hour
+            end
+          end
+          return object.to_s(format)
+        end
+
+        object.to_s
+
       end
 
       private def load_file(filename)

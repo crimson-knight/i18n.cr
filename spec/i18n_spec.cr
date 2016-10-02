@@ -29,18 +29,18 @@ describe I18n do
   #  I18n.currency(123.123.to_s).should(eq("€123,123"))
   # end
 
-  # it "time default format" do
-  #  time = Time.now
-  #  I18n.time(time).should(eq(time.to_s("%H:%M:%S")))
-  # end
+  it "time default format" do
+    time = Time.now
+    I18n.localize(time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
+  end
 
-  # it "date default format" do
-  #  time = Time.now
-  #  I18n.date(time).should(eq(time.to_s("%Y-%m-%d")))
-  # end
+  it "date default format" do
+    time = Time.now
+    I18n.localize(time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
+  end
 
-  # it "date long format" do
-  #  time = Time.now
-  #  I18n.date(time, locale: "en", format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
-  # end
+  it "date long format" do
+    time = Time.now
+    I18n.localize(time, scope: :date, force_locale: "en", format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
+  end
 end

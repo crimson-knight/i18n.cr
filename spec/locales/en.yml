@@ -1,0 +1,29 @@
+new_message:
+    "1"    : "you have a message"
+    "2.."  : 'you have %d new messages'
+    "other": 'no messages'
+
+__formats__:
+    number:
+        decimal_separator: ','
+        precision_separator: '.'
+
+    currency:
+        symbol: '€'
+        name: 'euro'
+        format: '€%s'
+
+    date:
+        formats:
+            default: "%Y-%m-%d"
+            long: "%A, %d of %B %Y"
+
+        month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+        abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+
+        day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+        abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+
+    time: 
+        formats:
+            default: "%I:%M:%S %p"

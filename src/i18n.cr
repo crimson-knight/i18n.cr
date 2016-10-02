@@ -59,4 +59,22 @@ module I18n
     end
     # end
   end
+
+  def localize(object, **options)
+    backend = config.backend
+    locale = options[:force_locale]? || config.locale.to_s
+
+    result = begin
+      backend.localize(locale, object, **options)
+    rescue e
+      e
+    end
+
+    if result.is_a?(Exception)
+      result.inspect
+    else
+      result
+    end
+  end
+
 end

@@ -3,7 +3,7 @@ module I18n
     abstract class Base
       abstract def load(*args)
       abstract def translate(locale : String, key : String, **options) : String
-      abstract def localize(locale : String, object, format = :default, **options) : String
+      abstract def localize(locale : String, object, type = :default, **options) : String
     end
   end
 end
