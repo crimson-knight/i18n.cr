@@ -59,8 +59,18 @@ module I18n
             end
           end
           return object.to_s(format)
+
+        elsif object.is_a?(Number) && (scope == :number || scope == :currency)
+          number = self.format_number(locale, object)
+
+          if scope == :currency
+            number = translate(locale, "__formats__.currency.format", format: true) % number
+          end
+
+          return number
         end
 
+        # Don't know what to do, return the object
         object.to_s
 
       end
@@ -71,6 +81,51 @@ module I18n
         rescue e : YAML::ParseException
           raise InvalidLocaleData.new(filename, e.inspect)
         end
+      end
+
+      def format_number(locale : String, object : Number) : String
+
+        value = object.to_s
+        # get decimal separator
+        dec_separator = translate(locale, "__formats__.number.decimal_separator")
+        if (dec_separator)
+          value = value.sub(Regex.new("\\."), dec_separator)
+        end
+
+        # ## set precision separator ###
+        # split by decimal separator
+        match = value.match(Regex.new("(\\d+)#{dec_separator}?(\\d+)?", Regex::Options::IGNORE_CASE))
+        if (!match)
+          return value
+        end
+        #match = match as Regex::MatchData
+
+        integer = match[1]
+        decimal = match[2]?
+
+        precision_separator = translate(locale, "__formats__.number.precision_separator")
+        new_value = ""
+        counter = 0
+        index = integer.size - 1
+        while (index >= 0)
+          if (counter >= 3)
+            new_value = precision_separator + new_value
+            counter = 0
+          end
+
+          new_value = integer[index].to_s + new_value
+
+          index -= 1
+          counter += 1
+        end
+
+        value = new_value
+        if (decimal)
+          value += dec_separator + decimal
+        end
+
+        return value
+
       end
 
       def self.normalize(data : Hash, path : String = "", final = Hash(String, YAML::Type).new)

@@ -17,17 +17,17 @@ describe I18n do
     I18n.translate("new_message", count: 2).should(eq("tem 2 novas mensagens"))
   end
 
-  # it "format number" do
-  #  I18n.number(1234.to_s).should(eq("1.234"))
-  # end
+  it "format number" do
+    I18n.localize(1234).should(eq("1.234"))
+  end
 
-  # it "format number with decimals" do
-  #  I18n.number(123.123.to_s).should(eq("123,123"))
-  # end
+  it "format number with decimals" do
+    I18n.localize(123.123).should(eq("123,123"))
+  end
 
-  # it "format number to currency" do
-  #  I18n.currency(123.123.to_s).should(eq("€123,123"))
-  # end
+  it "format number to currency" do
+    I18n.localize(123.123, scope: :currency).should(eq("123,123€"))
+  end
 
   it "time default format" do
     time = Time.now
