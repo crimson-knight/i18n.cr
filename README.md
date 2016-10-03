@@ -1,6 +1,6 @@
 # i18n
 
-TODO: Write a description here
+Internationalization API
 
 ## Installation
 
@@ -19,10 +19,15 @@ dependencies:
 
 ```crystal
 require "i18n"
+
+I18n.load_path += ["spec/locales"]
+I18n.locale = "pt"
+I18n.init
+
+I18n.localize(123.123, scope: :currency) # => "123,123€"
+I18n.translate("hello")                  # => "olá"
+
 ```
-
-
-TODO: Write usage instructions here
 
 ## Development
 
@@ -38,4 +43,9 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Arnaud Fernandés - creator, maintainer
+- [[TechMagister]](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
+
+Some parts are taken from :
+https://github.com/whity/crystal-i18n
+https://github.com/mattetti/i18n
+
