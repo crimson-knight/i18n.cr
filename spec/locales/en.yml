@@ -1,7 +1,6 @@
 new_message:
-    "1"    : "you have a message"
-    "2.."  : 'you have %d new messages'
-    "other": 'no messages'
+    "one"    : "you have a message"
+    "other"  : 'you have %d new messages'
 
 __formats__:
     number:
@@ -11,7 +10,7 @@ __formats__:
     currency:
         symbol: '€'
         name: 'euro'
-        format: '€%s'
+        format: '%s€'
 
     date:
         formats:

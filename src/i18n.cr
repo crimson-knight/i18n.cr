@@ -38,7 +38,7 @@ module I18n
 
   def translate(key : String, **options) : String
     backend = config.backend
-    locale = options[:locale]? || config.locale.to_s
+    locale = options[:force_locale]? || config.locale.to_s
     handling = options[:throw]? && :throw
 
     raise I18n::ArgumentError.new if key.empty?
