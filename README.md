@@ -10,7 +10,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   i18n:
-    github: [your-github-name]/i18n
+    github: TechMagister/i18n
 ```
 
 
@@ -46,6 +46,6 @@ TODO: Write development instructions here
 - [[TechMagister]](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
 
 Some parts are taken from :
-https://github.com/whity/crystal-i18n
-https://github.com/mattetti/i18n
+- https://github.com/whity/crystal-i18n
+- https://github.com/mattetti/i18n
 
