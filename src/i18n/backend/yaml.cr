@@ -88,6 +88,7 @@ module I18n
         end
       end
 
+      # see https://github.com/whity/crystal-i18n/blob/96defcb7266c7b526ab6f1a5648e3b5b240b6d58/src/i18n/i18n.cr
       def format_number(locale : String, object : Number) : String
 
         value = object.to_s
