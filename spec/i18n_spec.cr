@@ -43,4 +43,13 @@ describe I18n do
     time = Time.now
     I18n.localize(time, scope: :date, force_locale: "en", format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
   end
+
+  it "is a missing translation" do
+    I18n.translate("missing").should(eq("[Missing translation : pt#missing]"))
+    I18n.translate("missing2", force_locale: "en").should(eq("[Missing translation : en#missing2]"))
+  end
+
+  it "should replace by default value" do
+    I18n.translate("hello", force_locale: "en", default: "Hi").should(eq("Hi"))
+  end
 end

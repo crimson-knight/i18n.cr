@@ -26,8 +26,13 @@ module I18n
           key += count == 1 ? ".one" : ".other"
         end
 
-        tr = @translations[locale][key]?
-        raise MissingTranslation.new(locale, key, options) unless tr
+        tr = @translations[locale][key]? || options[:default]?
+        return I18n.exception_handler.call(
+          MissingTranslation.new(locale, key, options),
+          locale,
+          key,
+          options
+         ) unless tr
 
         if tr && (iter = options[:iter]?) && tr.is_a? Array(YAML::Type)
           tr = tr[iter]

@@ -1,4 +1,22 @@
 module I18n
+
+  # Handles exceptions raised in the backend. All exceptions except for
+  # MissingTranslationData exceptions are re-thrown. When a MissingTranslationData
+  # was caught the handler returns an error message string containing the key/scope.
+  # Note that the exception handler is not called when the option :throw was given.
+  class ExceptionHandler
+        def call(exception, locale, key, options)
+          case exception
+          when MissingTranslation
+            exception.message
+          when Exception
+            raise exception
+          else
+            throw :exception, exception
+          end
+        end
+  end
+
   class ArgumentError < ::ArgumentError; end
 
   class InvalidLocale < ArgumentError
@@ -22,7 +40,7 @@ module I18n
     end
 
     def message
-      "translation missing: #{@key}"
+      "[Missing translation : #{@locale}\##{@key}]"
     end
 
     def to_s
