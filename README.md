@@ -10,7 +10,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   i18n:
-    github: TechMagister/i18n
+    github: TechMagister/i18n.cr
 ```
 
 
