@@ -1,3 +1,5 @@
+require "./backend/base"
+
 module I18n
   class Config
     @locale : String?
@@ -12,6 +14,11 @@ module I18n
     # Sets the current locale pseudo-globally, i.e. in the Thread.current hash.
     def locale=(locale)
       @locale = locale
+    end
+
+    # Returns the available locales
+    def available_locales : Array(String)
+      backend.available_locales
     end
 
     # Returns the current backend.

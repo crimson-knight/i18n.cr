@@ -5,7 +5,10 @@ require "./base"
 module I18n
   module Backend
     class Yaml < I18n::Backend::Base
+      getter available_locales
+
       @translations = Hash(String, Hash(String, YAML::Type)).new
+      @available_locales = Array(String).new
 
       def load(*args)
         if args[0].is_a?(String)
@@ -15,6 +18,7 @@ module I18n
             lang = File.basename(file, ".yml")
             lang_data = load_file(file)
             @translations[lang] = Yaml.normalize(lang_data.as_h)
+            @available_locales << lang
           end
         else
           raise ArgumentError.new("First argument should be a filename")
@@ -32,7 +36,7 @@ module I18n
           locale,
           key,
           options
-         ) unless tr
+        ) unless tr
 
         if tr && (iter = options[:iter]?) && tr.is_a? Array(YAML::Type)
           tr = tr[iter]
@@ -49,22 +53,20 @@ module I18n
         base_key = "__formats__."
 
         if object.is_a?(Time) && (scope == :time || scope == :date || scope == :datetime)
-
-          base_key += scope.to_s + ((format = options[:format]?) ? ".formats." + format.to_s : ".formats.default" )
+          base_key += scope.to_s + ((format = options[:format]?) ? ".formats." + format.to_s : ".formats.default")
 
           format = translate(locale, base_key, format: true)
           format = format.to_s.gsub(/%[aAbBpP]/) do |match|
             case match
-              when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.to_i, format: true)
-              when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.to_i, format: true)
-              when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month, format: true)
-              when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month, format: true)
-              when "%p" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").upcase if object.responds_to? :hour
-              when "%P" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").downcase if object.responds_to? :hour
+            when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.to_i, format: true)
+            when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.to_i, format: true)
+            when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month, format: true)
+            when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month, format: true)
+            when "%p" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").upcase if object.responds_to? :hour
+            when "%P" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").downcase if object.responds_to? :hour
             end
           end
           return object.to_s(format)
-
         elsif object.is_a?(Number) && (scope == :number || scope == :currency)
           number = self.format_number(locale, object)
 
@@ -77,7 +79,6 @@ module I18n
 
         # Don't know what to do, return the object
         object.to_s
-
       end
 
       private def load_file(filename)
@@ -90,7 +91,6 @@ module I18n
 
       # see https://github.com/whity/crystal-i18n/blob/96defcb7266c7b526ab6f1a5648e3b5b240b6d58/src/i18n/i18n.cr
       def format_number(locale : String, object : Number) : String
-
         value = object.to_s
         # get decimal separator
         dec_separator = translate(locale, "__formats__.number.decimal_separator")
@@ -104,7 +104,7 @@ module I18n
         if (!match)
           return value
         end
-        #match = match as Regex::MatchData
+        # match = match as Regex::MatchData
 
         integer = match[1]
         decimal = match[2]?
@@ -131,7 +131,6 @@ module I18n
         end
 
         return value
-
       end
 
       def self.normalize(data : Hash, path : String = "", final = Hash(String, YAML::Type).new)

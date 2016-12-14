@@ -4,6 +4,7 @@ module I18n
       abstract def load(*args)
       abstract def translate(locale : String, key : String, **options) : String
       abstract def localize(locale : String, object, scope = :number, **options) : String
+      abstract def available_locales : Array(String)
     end
   end
 end
