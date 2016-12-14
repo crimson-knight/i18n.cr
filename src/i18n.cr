@@ -76,5 +76,4 @@ module I18n
       result
     end
   end
-
 end
