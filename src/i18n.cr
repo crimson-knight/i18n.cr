@@ -60,12 +60,12 @@ module I18n
     # end
   end
 
-  def localize(object, **options)
+  def localize(object, force_locale = config.locale.to_s, format = nil, scope = :number)
     backend = config.backend
-    locale = options[:force_locale]? || config.locale.to_s
+    locale = force_locale
 
     result = begin
-      backend.localize(locale, object, **options)
+      backend.localize(locale, object, format: format, scope: scope)
     rescue e
       e
     end

@@ -49,11 +49,40 @@ module I18n
         end
       end
 
-      def localize(locale : String, object, scope = :number, **options) : String
+      # Localize a number, a date or a datetime, a currency
+      # Use the format if given
+      # scope can be one of :number ( default ), :time, :date, :datetime, :currency
+      # Following keys are required :
+      # 
+      # __formats__:
+      #       number:
+      #         decimal_separator: ','
+      #       precision_separator: '.'
+      #  
+      #       currency:
+      #         symbol: '€'
+      #       name: 'euro'
+      #       format: '%s€'
+      #  
+      #       date:
+      #         formats:
+      #         default: "%Y-%m-%d"
+      #       long: "%A, %d of %B %Y"
+      #  
+      #       month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+      #       abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+      #  
+      #       day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+      #       abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+      #  
+      #       time: 
+      #         formats:
+      #             default: "%I:%M:%S %p"
+      def localize(locale : String, object, scope = :number, format = nil) : String
         base_key = "__formats__."
 
         if object.is_a?(Time) && (scope == :time || scope == :date || scope == :datetime)
-          base_key += scope.to_s + ((format = options[:format]?) ? ".formats." + format.to_s : ".formats.default")
+          base_key += scope.to_s + (format ? ".formats." + format.to_s : ".formats.default")
 
           format = translate(locale, base_key, format: true)
           format = format.to_s.gsub(/%[aAbBpP]/) do |match|

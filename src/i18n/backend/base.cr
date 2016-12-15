@@ -3,7 +3,7 @@ module I18n
     abstract class Base
       abstract def load(*args)
       abstract def translate(locale : String, key : String, count = nil, default = nil, iter = nil, format = nil) : String
-      abstract def localize(locale : String, object, scope = :number, **options) : String
+      abstract def localize(locale : String, object, scope = :number, format = nil) : String
       abstract def available_locales : Array(String)
     end
   end
