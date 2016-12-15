@@ -17,7 +17,7 @@ module I18n
 
   # Gets I18n configuration object.
   def config
-    @@inner_config ||= I18n::Config.new
+    @@inner_config ||= Config.new
   end
 
   # Sets I18n configuration object.
