@@ -35,7 +35,7 @@ module I18n
   end
 
   class MissingTranslation < ArgumentError
-    def initialize(@locale : String, @key : String, options)
+    def initialize(@locale : String, @key : String)
     end
 
     def message

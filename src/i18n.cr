@@ -36,15 +36,15 @@ module I18n
     define_delegator({{name.id}})
   {% end %}
 
-  def translate(key : String, **options) : String
+  def translate(key : String, force_locale = config.locale.to_s, throw = :throw, count = nil, default = nil, iter = nil) : String
     backend = config.backend
-    locale = options[:force_locale]? || config.locale.to_s
-    handling = options[:throw]? && :throw
+    locale = force_locale
+    handling = throw
 
     raise I18n::ArgumentError.new if key.empty?
 
     result = begin
-      backend.translate(locale, key, **options)
+      backend.translate(locale, key, count: count, default: default)
     rescue e
       e
     end

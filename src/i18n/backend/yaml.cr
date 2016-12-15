@@ -25,24 +25,24 @@ module I18n
         end
       end
 
-      def translate(locale : String, key : String, **options) : String
-        if count = options[:count]?
-          key += count == 1 ? ".one" : ".other"
-        end
+      def translate(locale : String, key : String, count = nil, default = nil, iter = nil, format = nil) : String
+        key += count == 1 ? ".one" : ".other" if count
+        options = {count: count, default: default, iter: iter, format: format}
+        
 
-        tr = @translations[locale][key]? || options[:default]?
+        tr = @translations[locale][key]? || default
         return I18n.exception_handler.call(
-          MissingTranslation.new(locale, key, options),
+          MissingTranslation.new(locale, key),
           locale,
           key,
           options
         ) unless tr
 
-        if tr && (iter = options[:iter]?) && tr.is_a? Array(YAML::Type)
+        if tr && iter && tr.is_a? Array(YAML::Type)
           tr = tr[iter]
         end
 
-        if options[:format]?
+        if format
           tr.to_s
         else
           tr.to_s % options

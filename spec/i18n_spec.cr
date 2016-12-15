@@ -5,6 +5,10 @@ describe I18n do
   I18n.locale = "pt"
   I18n.init
 
+  it "should return the available locales" do
+    I18n.available_locales.should eq ["en", "pt"]
+  end
+
   it "translate" do
     I18n.translate("hello").should(eq("olá"))
   end
