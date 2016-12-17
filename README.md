@@ -15,7 +15,7 @@ dependencies:
 
 
 ## Usage
-
+The YAML backend is the only one for now, but feel free to write some others :)
 
 ```crystal
 require "i18n"
