@@ -29,6 +29,9 @@ I18n.translate("hello")                  # => "olá"
 
 ```
 
+There is a handler for Kemalyst that bring I18n configuration : 
+https://github.com/TechMagister/kemalyst-i18n
+
 ## Development
 
 TODO: Write development instructions here
