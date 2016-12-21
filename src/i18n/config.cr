@@ -36,6 +36,10 @@ module I18n
       @@default_locale ||= "en"
     end
 
+    def default_locale=(new_default : String)
+      @@default_locale = new_default if available_locales.includes? new_default
+    end
+
     # Returns the current default scope separator. Defaults to '.'
     def default_separator
       @@default_separator ||= '.'

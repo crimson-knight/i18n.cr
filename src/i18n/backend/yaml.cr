@@ -6,9 +6,18 @@ module I18n
   module Backend
     class Yaml < I18n::Backend::Base
       getter available_locales
+      property translations
 
       @translations = Hash(String, Hash(String, YAML::Type)).new
       @available_locales = Array(String).new
+
+      macro embed(dirs)
+        {% begin %}
+          {% for dir in dirs %}
+            \{{ run("i18n/backend/yaml_embed", {{dir}}) }}
+          {% end %}
+        {% end %}
+      end
 
       def load(*args)
         if args[0].is_a?(String)
@@ -25,10 +34,9 @@ module I18n
         end
       end
 
-      def translate(locale : String, key : String, count = nil, default = nil, iter = nil, format = nil) : String
+      def translate(locale : String, key : String, count = nil, default = nil, iter = nil) : String
         key += count == 1 ? ".one" : ".other" if count
-        options = {count: count, default: default, iter: iter, format: format}
-        
+        options = {count: count, default: default, iter: iter}
 
         tr = @translations[locale][key]? || default
         return I18n.exception_handler.call(
@@ -42,40 +50,36 @@ module I18n
           tr = tr[iter]
         end
 
-        if format
-          tr.to_s
-        else
-          tr.to_s % options
-        end
+        tr.to_s
       end
 
       # Localize a number, a date or a datetime, a currency
       # Use the format if given
       # scope can be one of :number ( default ), :time, :date, :datetime, :currency
       # Following keys are required :
-      # 
+      #
       # __formats__:
       #       number:
       #         decimal_separator: ','
       #       precision_separator: '.'
-      #  
+      #
       #       currency:
       #         symbol: '€'
       #       name: 'euro'
       #       format: '%s€'
-      #  
+      #
       #       date:
       #         formats:
       #         default: "%Y-%m-%d"
       #       long: "%A, %d of %B %Y"
-      #  
+      #
       #       month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
       #       abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
-      #  
+      #
       #       day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
       #       abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
-      #  
-      #       time: 
+      #
+      #       time:
       #         formats:
       #             default: "%I:%M:%S %p"
       def localize(locale : String, object, scope = :number, format = nil) : String
@@ -84,13 +88,13 @@ module I18n
         if object.is_a?(Time) && (scope == :time || scope == :date || scope == :datetime)
           base_key += scope.to_s + (format ? ".formats." + format.to_s : ".formats.default")
 
-          format = translate(locale, base_key, format: true)
+          format = translate(locale, base_key)
           format = format.to_s.gsub(/%[aAbBpP]/) do |match|
             case match
-            when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.to_i, format: true)
-            when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.to_i, format: true)
-            when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month, format: true)
-            when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month, format: true)
+            when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.to_i)
+            when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.to_i)
+            when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month)
+            when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month)
             when "%p" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").upcase if object.responds_to? :hour
             when "%P" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").downcase if object.responds_to? :hour
             end
@@ -100,7 +104,7 @@ module I18n
           number = self.format_number(locale, object)
 
           if scope == :currency
-            number = translate(locale, "__formats__.currency.format", format: true) % number
+            number = translate(locale, "__formats__.currency.format") % number
           end
 
           return number

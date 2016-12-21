@@ -18,7 +18,8 @@ describe I18n do
   end
 
   it "pluralization translate 2" do
-    I18n.translate("new_message", count: 2).should(eq("tem 2 novas mensagens"))
+    tr = I18n.translate("new_message", count: 2) % {count: 2}
+    tr.should(eq("tem 2 novas mensagens"))
   end
 
   it "format number" do
