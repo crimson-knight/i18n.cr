@@ -35,8 +35,24 @@ I18n.localize(123.123, scope: :currency) # => "123,123€"
 I18n.translate("hello")                  # => "olá"
 
 ```
+There is a handler for Kemalyst that bring I18n configuration :
+https://github.com/TechMagister/kemalyst-i18n
 
 ### Note on YAML Backend
+
+#### Using count and iter
+
+| key     | count | iter | **key value**                                             | **final key** | **Output**  |
+|---------|-------|------|-----------------------------------------------------------|---------------|-------------|
+|         |       |      | mykey:                                                    |               |             |
+|         |       |      |   "one" : "One message"                                   |               |             |
+|         |       |      |   "other" : "%d message"                                  |               |             |
+|---------|-------|------|-----------------------------------------------------------|---------------|-------------|
+| mykey   |  1    |      |                                                           | mykey.one     | One message |
+| mykey   | > 1   |      |                                                           | mykey.others  | %d message  |
+| myarray |       | 2    | [milk, pumpkin pie, eggs, juice]                          |               | eggs        |
+
+#### Embedding
 
 The yaml backen allow to embed translations into the executable.
 
@@ -53,9 +69,6 @@ if I18n.available_locales.includes? env_lang
     I18n.locale = env_lang
 end
 ```
-
-There is a handler for Kemalyst that bring I18n configuration :
-https://github.com/TechMagister/kemalyst-i18n
 
 ## Development
 
