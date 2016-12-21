@@ -22,6 +22,7 @@ I18n.translate(locale : String, key : String, count = nil, default = nil, iter =
 I18n.localize(locale : String, object, scope = :number, format = nil) : String
 ```
 
+
 ```crystal
 require "i18n"
 
@@ -52,6 +53,9 @@ if I18n.available_locales.includes? env_lang
     I18n.locale = env_lang
 end
 ```
+
+There is a handler for Kemalyst that bring I18n configuration :
+https://github.com/TechMagister/kemalyst-i18n
 
 ## Development
 
