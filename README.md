@@ -74,7 +74,7 @@ end
 
 TODO :
 - [ ] Add more backends ( Database, json based, ruby based ( why not ? ))
-- [ ] others
+- [ ] others ( there is always something to add ... or remove )
 
 ## Contributing
 
@@ -88,6 +88,6 @@ TODO :
 
 - [[TechMagister]](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
 
-Some parts are taken from :
+Inspiration taken from :
 - https://github.com/whity/crystal-i18n
 - https://github.com/mattetti/i18n
