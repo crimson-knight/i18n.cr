@@ -3,7 +3,7 @@ require "./spec_helper"
 describe I18n do
   describe ".available_profiles" do
     it "should return the available locales" do
-      I18n.available_locales.should eq ["en", "pt"]
+      I18n.available_locales.sort.should eq ["en", "pt"]
     end
   end
 

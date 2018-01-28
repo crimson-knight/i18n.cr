@@ -16,7 +16,7 @@ describe I18n::Backend::Yaml do
     end
 
     it "loads all available languages" do
-      backend.available_locales.should eq(%w(en pt))
+      backend.available_locales.sort.should eq(%w(en pt))
     end
   end
 
