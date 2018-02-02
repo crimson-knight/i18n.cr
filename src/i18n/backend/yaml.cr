@@ -26,8 +26,11 @@ module I18n
           files.each do |file|
             lang = File.basename(file, ".yml")
             lang_data = load_file(file)
-            @translations[lang] = Yaml.normalize(lang_data.as_h)
-            @available_locales << lang
+            next if lang_data.raw.nil?
+
+            @translations[lang] ||= {} of String => YAML::Type            
+            @translations[lang].merge!(self.class.normalize(lang_data.as_h))
+            @available_locales << lang unless @available_locales.includes?(lang)
           end
         else
           raise ArgumentError.new("First argument should be a filename")
@@ -36,14 +39,13 @@ module I18n
 
       def translate(locale : String, key : String, count = nil, default = nil, iter = nil) : String
         key += count == 1 ? ".one" : ".other" if count
-        options = {count: count, default: default, iter: iter}
 
         tr = @translations[locale][key]? || default
         return I18n.exception_handler.call(
           MissingTranslation.new(locale, key),
           locale,
           key,
-          options
+          {count: count, default: default, iter: iter}
         ) unless tr
 
         if tr && iter && tr.is_a? Array(YAML::Type)
