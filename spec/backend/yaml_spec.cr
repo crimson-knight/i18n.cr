@@ -47,28 +47,36 @@ describe I18n::Backend::Yaml do
   describe "#localize" do
     time = Time.new(2010, 10, 11, 12, 13, 14)
 
-    it "format number" do
-      backend.localize("pt", 1234).should(eq("1.234"))
+    context "with number format" do
+      it { backend.localize("pt", 123).should(eq("123")) }
+      it { backend.localize("pt", 1234).should(eq("1.234")) }
+      it { backend.localize("pt", 12345).should(eq("12.345")) }
+      it { backend.localize("pt", 123456).should(eq("123.456")) }
+      it { backend.localize("pt", 1234567).should(eq("1.234.567")) }
+      it { backend.localize("pt", 12345678).should(eq("12.345.678")) }
+      it { backend.localize("pt", 123.123).should(eq("123,123")) }
+
+      it { backend.localize("pt", 1234.123, :time).should(eq("1234.123")) }
     end
 
-    it "format number with decimals" do
-      backend.localize("pt", 123.123).should(eq("123,123"))
+    context "with time format" do
+      it "time default format" do
+        backend.localize("pt", time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
+      end
+    end
+
+    context "with date format" do
+      it "date default format" do
+        backend.localize("pt", time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
+      end
+
+      it "date long format" do
+        backend.localize("en", time, scope: :date, format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
+      end
     end
 
     it "format number to currency" do
       backend.localize("pt", 123.123, scope: :currency).should(eq("123,123€"))
-    end
-
-    it "time default format" do
-      backend.localize("pt", time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
-    end
-
-    it "date default format" do
-      backend.localize("pt", time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
-    end
-
-    it "date long format" do
-      backend.localize("en", time, scope: :date, format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
     end
   end
 end
