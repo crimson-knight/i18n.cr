@@ -4,7 +4,6 @@ Internationalization API
 
 ## Installation
 
-
 Add this to your application's `shard.yml`:
 
 ```yaml
@@ -13,66 +12,177 @@ dependencies:
     github: TechMagister/i18n.cr
 ```
 
-
 ## Usage
 
 ``` crystal
-I18n.translate(locale : String, key : String, count = nil, default = nil, iter = nil, format = nil) : String
+I18n.translate(
+    "some.dot.separated.path",  # key : String
+    {attr_to_interpolate: "a"}, # options : Hash | NamedTuple? = nil
+    "pt",                       # force_locale : String = nil
+    2,                          # count : Numeric? = nil
+    "default translation",      # default : String? = nil
+    nil                         # iter : Int? = nil
+)
 
-I18n.localize(locale : String, object, scope = :number, format = nil) : String
+I18n.localize(
+    Time.utc_now, # object : _
+    "pt",         # force_locale : String = I18n.config.locale
+    :time,        # scope : Symbol? = :number
+    "long"        # format : String? = nil
+)
 ```
 
+### Arguments interpolation
+
+Translation may include argument interpolation. For doing this use regular crystal named interpolation placeholder and pass hash or named tuple as a `options` argument:
+
+```yaml
+message:
+  new: "New message: %{text}"
+```
+
+```crystal
+# New message: hello
+I18n.translate("message.new", {text: "hello"})
+I18n.translate("message.new", {:text => "hello"})
+I18n.translate("message.new", {"text" => "hello"})
+```
+
+Also any extra key-value pair will be ignored and missing one will not cause any exception:
+
+```crystal
+I18n.translate("message.new", {message: "hello"}) # New message: %{text}
+```
+
+### Configuration
 
 ```crystal
 require "i18n"
 
 I18n.load_path += ["spec/locales"]
-I18n.init
+I18n.init # This will load locales from all specified locations
 
 I18n.default_locale = "pt" # default can be set after loading translations
-
-I18n.localize(123.123, scope: :currency) # => "123,123€"
-I18n.translate("hello")                  # => "olá"
-
 ```
-There is a handler for Kemalyst that bring I18n configuration :
-https://github.com/TechMagister/kemalyst-i18n
+
+There is a [handler](https://github.com/TechMagister/kemalyst-i18n) for Kemalyst that bring I18n configuration.
 
 ### Note on YAML Backend
 
-#### Using count and iter
+Putting translations for all parts of your application in one file per locale could be hard to manage. You can store these files in a hierarchy which makes sense to you.
 
-| key     | count | iter | **key value**                                             | **final key** | **Output**  |
-|---------|-------|------|-----------------------------------------------------------|---------------|-------------|
-|         |       |      | mykey:                                                    |               |             |
-|         |       |      |   "one" : "One message"                                   |               |             |
-|         |       |      |   "other" : "%d message"                                  |               |             |
-|---------|-------|------|-----------------------------------------------------------|---------------|-------------|
-| mykey   |  1    |      |                                                           | mykey.one     | One message |
-| mykey   | > 1   |      |                                                           | mykey.others  | %d message  |
-| myarray |       | 2    | [milk, pumpkin pie, eggs, juice]                          |               | eggs        |
+For example, your config/locales directory could look like this:
 
-#### Embedding
+```
+locales
+|--defaults
+|----en.yml
+|----pt.yml
+|--models
+|----en.yml
+|----pt.yml
+|--views
+|----users
+|------en.yml
+|------pt.yml
+```
 
-The yaml backen allow to embed translations into the executable.
+This way you can separate model related translations from the view ones. To require all described subfolders at once use `**` - `I18n.load_path += ["locals/**/*.yml"]`
 
-``` crystal
-require "i18n"
+#### Date/Time Formats
 
-I18n.backend = I18n::Backend::Yaml.new
-I18n.backend.as(I18n::Backend::Yaml).embed ["spec/locales"]
+To localize the time (or date) format you should pass `Time` object to the `I18n.localize`. To pick a specific format path `format` argument:
 
-I18n.default_locale = "en" # default can be set after loading translations
+```crystal
+I18n.localize(Time.now, scope: :date, format: :long)
+```
 
-env_lang = ENV["LANG"][0,2]
-if I18n.available_locales.includes? env_lang
-    I18n.locale = env_lang
-end
+> By default `Time` will be localized with `:time` scope.
+
+To specify formats and all need localization information (like day or month names) fill your file in following way:
+
+```yaml
+__formats__:
+  date:
+    formats:
+      default: '%Y-%m-%d' # is used by default
+      long: '%A, %d de %B %Y'
+    month_names: # long month names
+      -
+      - Janeiro
+      - Fevereiro
+      - Março
+      - Abril
+      - Maio
+      - Junho
+      - Julho
+      - Agosto
+      - Setembro
+      - Outubro
+      - Novembro
+      - Dezembro
+    abbr_month_names: # month abbreviations
+      -
+      - Jan
+      - Fev
+      # ...
+    day_names: # fool day names
+      - Domingo
+      - Segunda
+      # ...
+    abbr_day_names: # short day names
+      - Dom
+      - Seg
+      # ...
+```
+
+Format accepts any crystal `Time::Format` directives. Also following directives will be automatically localized:
+
+| Directive | Description | Key |
+|---|---|---|
+| `%a` | short day name | `date.abbr_day_names` |
+| `%A` | day name | `date.day_names` |
+| `%b` | short month name | `date.abbr_month_names` |
+| `%B` | month name | `date.month_names` |
+| `%p` | am-pm (lowercase) | `time.am`/`time.pm` |
+| `%P` | AM-PM (uppercase) | `time.am`/`time.pm` |
+
+#### Pluralization
+
+In English there are only one singular and one plural form for a given string, e.g. "1 message" and "2 messages" - for now yaml backend supports only this. The `count` interpolation variable has a special role in that it both is interpolated to the translation and used to pick a pluralization from the translations according to the pluralization rules defined by CLDR:
+
+```yaml
+message:
+  one: "%{count} message"
+  other: "%{count} messages"
+```
+
+```crystal
+I18n.translate("message", count: 1) # 1 message
+I18n.translate("message", count: 2) # 2 messages
+I18n.translate("message", count: 0) # 0 messages
+```
+
+> `count` should be passed as argument - not inside of `options`. Otherwise regular translation lookup will be applied.
+
+#### Iteration
+
+To store several alternative objects under one localization key they could be just listed in the file and later retrieved using `iter` argument:
+
+```yaml
+__formats__:
+  date:
+    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+```
+
+```crystal
+I18n.translate("__formats__.date.day_names", iter: 2) "Tuesday"
 ```
 
 ## Development
 
 TODO :
+
 - [ ] Add more backends ( Database, json based, ruby based ( why not ? ))
 - [ ] others ( there is always something to add ... or remove )
 
@@ -88,6 +198,7 @@ TODO :
 
 - [[TechMagister]](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
 
-Inspiration taken from :
+Inspiration taken from:
+
 - https://github.com/whity/crystal-i18n
 - https://github.com/mattetti/i18n
