@@ -32,16 +32,17 @@ describe I18n::Backend::Yaml do
       end
     end
 
+    context "with pluralization" do
+      it { backend.translate("pt", "new_message", count: 1).should(eq("tem uma nova mensagem")) }
+      it { backend.translate("en", "messages.plural", {attr: "a"}, count: 1).should eq("1 a") }
+
+      it { backend.translate("pt", "new_message", count: 2).should(eq("tem 2 novas mensagens")) }
+      it { backend.translate("en", "messages.plural", { :attr => "b" }, count: 2).should eq("2 bs") }
+    end
+
+    it { backend.translate("en", "messages.with_2_arguments", {attr: "a", attr2: "b"}).should eq("a and b") }
     it { backend.translate("pt", "hello").should(eq("olá")) }
-
-    it "pluralization translate 1" do
-      backend.translate("pt", "new_message", count: 1).should(eq("tem uma nova mensagem"))
-    end
-
-    it "pluralization translate 2" do
-      tr = backend.translate("pt", "new_message", count: 2) % {count: 2}
-      tr.should(eq("tem 2 novas mensagens"))
-    end
+    it { backend.translate("pt", "__formats__.date.day_names", iter: 2).should eq("Terça") }
   end
 
   describe "#localize" do

@@ -5,6 +5,8 @@ require "./base"
 module I18n
   module Backend
     class Yaml < I18n::Backend::Base
+      EMPTY_HASH = {} of String => String
+
       getter available_locales
       property translations
 
@@ -37,22 +39,30 @@ module I18n
         end
       end
 
-      def translate(locale : String, key : String, count = nil, default = nil, iter = nil) : String
+      def translate(locale : String, key : String, options : Hash | NamedTuple? = EMPTY_HASH, count = nil, default = nil, iter = nil) : String
         key += count == 1 ? ".one" : ".other" if count
 
         tr = @translations[locale][key]? || default
-        return I18n.exception_handler.call(
-          MissingTranslation.new(locale, key),
-          locale,
-          key,
-          {count: count, default: default, iter: iter}
-        ) unless tr
-
-        if tr && iter && tr.is_a? Array(YAML::Type)
-          tr = tr[iter]
+        unless tr
+          return I18n.exception_handler.call(
+            MissingTranslation.new(locale, key),
+            locale,
+            key,
+            options,
+            count,
+            default
+          )
         end
 
-        tr.to_s
+        return tr[iter].to_s if tr && iter && tr.is_a? Array(YAML::Type)
+
+        tr = tr.to_s
+        tr = tr.sub(/\%{count}/, count) if count
+        return tr unless options
+        options.each do |attr, value|
+          tr = tr.gsub(/\%{#{attr}}/, value)
+        end
+        tr
       end
 
       # Localize a number or a currency
@@ -74,7 +84,7 @@ module I18n
 
         number = format_number(locale, object)
         if scope == :currency
-          number = translate(locale, "__formats__.currency.format") % number
+          number = translate(locale, "__formats__.currency.format", { "amount" => number })
         end
 
         number

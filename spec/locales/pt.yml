@@ -10,7 +10,7 @@ __formats__:
     currency:
       symbol: €
       name: euro
-      format: "%s€"
+      format: "%{amount}€"
     date:
       formats:
         default: '%Y-%m-%d'

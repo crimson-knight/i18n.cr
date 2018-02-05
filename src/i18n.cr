@@ -15,8 +15,6 @@ module I18n
     {% end %}
   end
 
-  @@inner_config
-
   # Gets I18n configuration object.
   def config
     @@inner_config ||= Config.new
@@ -35,15 +33,13 @@ module I18n
 
   define_delegators(%w(locale backend default_locale available_locales default_separator exception_handler load_path))
 
-  def translate(key : String, force_locale = config.locale, _throw = :throw, count = nil, default = nil, iter = nil) : String
-    backend = config.backend
-    locale = force_locale
-    # handling = _throw
-
+  def translate(key : String, options : Hash | NamedTuple? = nil, force_locale = config.locale, count = nil, default = nil, iter = nil) : String
     raise I18n::ArgumentError.new if key.empty?
 
+    backend = config.backend
+
     begin
-      backend.translate(locale, key, count: count, default: default)
+      backend.translate(force_locale, key, options: options, count: count, default: default)
     rescue e
       e.inspect
     end
@@ -54,39 +50,9 @@ module I18n
     # end
   end
 
-  def translate(key : String, force_locale = config.locale, count = nil, default = nil, iter = nil, &block) : String
-    puts "block"
-    backend = config.backend
-    locale = force_locale
-
-    raise I18n::ArgumentError.new if key.empty?
-
-    result =
-      begin
-        backend.translate(locale, key, count: count, default: default)
-      rescue e
-        e
-      end
-
-    if e.is_a?(MissingTranslation)
-      (yield e).to_s
-    else
-      result.as(String)
-    end
-  end
-
-  def localize(object, force_locale = config.locale, format = nil, scope = :number)
-    result = 
-      begin
-        config.backend.localize(force_locale, object, format: format, scope: scope)
-      rescue e
-        e
-      end
-
-    if result.is_a?(Exception)
-      result.inspect
-    else
-      result
-    end
+  def localize(object, force_locale = config.locale, *args, **options)
+    config.backend.localize(force_locale, object, *args, **options)
+  rescue e
+    e.inspect
   end
 end

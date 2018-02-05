@@ -4,7 +4,7 @@ module I18n
   # was caught the handler returns an error message string containing the key/scope.
   # Note that the exception handler is not called when the option :throw was given.
   class ExceptionHandler
-    def call(exception, locale, key, options)
+    def call(exception, locale, key, options, count, default)
       case exception
       when MissingTranslation
         exception.message
