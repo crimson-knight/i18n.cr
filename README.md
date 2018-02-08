@@ -197,6 +197,7 @@ TODO :
 ## Contributors
 
 - [[TechMagister]](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
+- [[imdrasil]](https://github.com/imdrasil) Roman Kalnytskyi
 
 Inspiration taken from:
 
