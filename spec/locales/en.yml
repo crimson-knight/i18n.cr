@@ -1,6 +1,11 @@
 new_message:
     "one"    : "you have a message"
-    "other"  : 'you have %d new messages'
+    "other"  : 'you have %{count} new messages'
+messages:
+    with_2_arguments: "%{attr} and %{attr2}"
+    plural:
+        one: "%{count} %{attr}"
+        other: "%{count} %{attr}s"
 
 __formats__:
     number:
@@ -10,7 +15,7 @@ __formats__:
     currency:
         symbol: '€'
         name: 'euro'
-        format: '%s€'
+        format: '%{amount}€'
 
     date:
         formats:

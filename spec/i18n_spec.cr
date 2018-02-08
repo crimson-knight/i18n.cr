@@ -19,21 +19,23 @@ describe I18n do
       end
     end
 
-    it "translate" do
-      I18n.translate("hello").should(eq("olá"))
+    context "with pluralization" do
+      it "pluralization translate 1" do
+        I18n.translate("new_message", count: 1).should(eq("tem uma nova mensagem"))
+      end
+
+      it "pluralization translate 2" do
+        tr = I18n.translate("new_message", count: 2)
+        tr.should(eq("tem 2 novas mensagens"))
+      end
     end
 
-    it "pluralization translate 1" do
-      I18n.translate("new_message", count: 1).should(eq("tem uma nova mensagem"))
-    end
-
-    it "pluralization translate 2" do
-      tr = I18n.translate("new_message", count: 2) % {count: 2}
-      tr.should(eq("tem 2 novas mensagens"))
-    end
+    it { I18n.translate("hello").should(eq("olá")) }
   end
 
   describe ".localize" do
+    time = Time.now
+
     it "format number" do
       I18n.localize(1234).should(eq("1.234"))
     end
@@ -47,18 +49,17 @@ describe I18n do
     end
 
     it "time default format" do
-      time = Time.now
       I18n.localize(time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
     end
 
     it "date default format" do
-      time = Time.now
       I18n.localize(time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
     end
 
     it "date long format" do
-      time = Time.now
       I18n.localize(time, scope: :date, force_locale: "en", format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
     end
+
+    it { I18n.localize(time, "en", :date, "long").should(eq(time.to_s("%A, %d of %B %Y"))) }
   end
 end

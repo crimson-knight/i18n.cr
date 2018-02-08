@@ -32,43 +32,52 @@ describe I18n::Backend::Yaml do
       end
     end
 
+    context "with pluralization" do
+      it { backend.translate("pt", "new_message", count: 1).should(eq("tem uma nova mensagem")) }
+      it { backend.translate("en", "messages.plural", {attr: "a"}, count: 1).should eq("1 a") }
+
+      it { backend.translate("pt", "new_message", count: 2).should(eq("tem 2 novas mensagens")) }
+      it { backend.translate("en", "messages.plural", { :attr => "b" }, count: 2).should eq("2 bs") }
+    end
+
+    it { backend.translate("en", "messages.with_2_arguments", {attr: "a", attr2: "b"}).should eq("a and b") }
     it { backend.translate("pt", "hello").should(eq("olá")) }
-
-    it "pluralization translate 1" do
-      backend.translate("pt", "new_message", count: 1).should(eq("tem uma nova mensagem"))
-    end
-
-    it "pluralization translate 2" do
-      tr = backend.translate("pt", "new_message", count: 2) % {count: 2}
-      tr.should(eq("tem 2 novas mensagens"))
-    end
+    it { backend.translate("pt", "__formats__.date.day_names", iter: 2).should eq("Terça") }
   end
 
   describe "#localize" do
     time = Time.new(2010, 10, 11, 12, 13, 14)
 
-    it "format number" do
-      backend.localize("pt", 1234).should(eq("1.234"))
+    context "with number format" do
+      it { backend.localize("pt", 123).should(eq("123")) }
+      it { backend.localize("pt", 1234).should(eq("1.234")) }
+      it { backend.localize("pt", 12345).should(eq("12.345")) }
+      it { backend.localize("pt", 123456).should(eq("123.456")) }
+      it { backend.localize("pt", 1234567).should(eq("1.234.567")) }
+      it { backend.localize("pt", 12345678).should(eq("12.345.678")) }
+      it { backend.localize("pt", 123.123).should(eq("123,123")) }
+
+      it { backend.localize("pt", 1234.123, :time).should(eq("1234.123")) }
     end
 
-    it "format number with decimals" do
-      backend.localize("pt", 123.123).should(eq("123,123"))
+    context "with time format" do
+      it "time default format" do
+        backend.localize("pt", time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
+      end
+    end
+
+    context "with date format" do
+      it "date default format" do
+        backend.localize("pt", time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
+      end
+
+      it "date long format" do
+        backend.localize("en", time, scope: :date, format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
+      end
     end
 
     it "format number to currency" do
       backend.localize("pt", 123.123, scope: :currency).should(eq("123,123€"))
-    end
-
-    it "time default format" do
-      backend.localize("pt", time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
-    end
-
-    it "date default format" do
-      backend.localize("pt", time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
-    end
-
-    it "date long format" do
-      backend.localize("en", time, scope: :date, format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
     end
   end
 end
