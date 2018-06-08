@@ -1,5 +1,6 @@
 ---
 hello: olá
+thanks: obrigado
 new_message:
   one: tem uma nova mensagem
   other: tem %{count} novas mensagens

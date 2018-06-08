@@ -30,7 +30,7 @@ module I18n
             lang_data = load_file(file)
             next if lang_data.raw.nil?
 
-            @translations[lang] ||= {} of String => YAML::Type            
+            @translations[lang] ||= {} of String => YAML::Type
             @translations[lang].merge!(self.class.normalize(lang_data.as_h))
             @available_locales << lang unless @available_locales.includes?(lang)
           end
@@ -84,7 +84,7 @@ module I18n
 
         number = format_number(locale, object)
         if scope == :currency
-          number = translate(locale, "__formats__.currency.format", { "amount" => number })
+          number = translate(locale, "__formats__.currency.format", {"amount" => number})
         end
 
         number
@@ -139,7 +139,7 @@ module I18n
         value = object.to_s
         # get decimal separator
         dec_separator = translate(locale, "__formats__.number.decimal_separator")
-        
+
         value = value.sub(/\./, dec_separator) if dec_separator
 
         # ## set precision separator ##
@@ -153,7 +153,7 @@ module I18n
 
         String.build do |io|
           precision_separator = translate(locale, "__formats__.number.precision_separator")
-          
+
           leading_digits = integer.size % 3
           precision_counter = leading_digits == 0 ? 0 : 3 - leading_digits
           index = integer.size - 1

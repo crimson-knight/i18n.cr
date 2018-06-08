@@ -6,7 +6,7 @@ describe I18n::Backend::Yaml do
   locales.each { |path| backend.load(path) }
 
   describe "%embed" do
-    pending "add" {}
+    pending "add" { }
   end
 
   describe "#load" do
@@ -37,7 +37,7 @@ describe I18n::Backend::Yaml do
       it { backend.translate("en", "messages.plural", {attr: "a"}, count: 1).should eq("1 a") }
 
       it { backend.translate("pt", "new_message", count: 2).should(eq("tem 2 novas mensagens")) }
-      it { backend.translate("en", "messages.plural", { :attr => "b" }, count: 2).should eq("2 bs") }
+      it { backend.translate("en", "messages.plural", {:attr => "b"}, count: 2).should eq("2 bs") }
     end
 
     it { backend.translate("en", "messages.with_2_arguments", {attr: "a", attr2: "b"}).should eq("a and b") }

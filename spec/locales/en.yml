@@ -1,3 +1,4 @@
+thanks: thanks
 new_message:
     "one"    : "you have a message"
     "other"  : 'you have %{count} new messages'
@@ -28,6 +29,6 @@ __formats__:
         day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
         abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
 
-    time: 
+    time:
         formats:
             default: "%I:%M:%S %p"
