@@ -62,4 +62,20 @@ describe I18n do
 
     it { I18n.localize(time, "en", :date, "long").should(eq(time.to_s("%A, %d of %B %Y"))) }
   end
+
+  describe ".with_locale" do
+    Spec.before_each do
+      I18n.locale = "en"
+    end
+
+    it "temporarity sets the given locale" do
+      I18n.locale.should eq("en")
+      I18n.translate("thanks").should eq("thanks")
+
+      (I18n.with_locale("pt") { I18n.translate("thanks") }).should(eq("obrigado"))
+
+      I18n.locale.should eq("en")
+      I18n.translate("thanks").should eq("thanks")
+    end
+  end
 end

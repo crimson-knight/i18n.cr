@@ -55,4 +55,14 @@ module I18n
   rescue e
     e.inspect
   end
+
+  # Executes block with given I18.locale set.
+  def with_locale(tmp_locale)
+    current_locale = config.locale
+    config.locale = tmp_locale
+
+    yield
+  ensure
+    config.locale = current_locale
+  end
 end
