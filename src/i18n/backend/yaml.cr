@@ -10,7 +10,7 @@ module I18n
       getter available_locales
       property translations
 
-      @translations = Hash(String, Hash(String, YAML::Type)).new
+      @translations = Hash(String, Hash(String, YAML::Any)).new
       @available_locales = Array(String).new
 
       macro embed(dirs)
@@ -30,8 +30,8 @@ module I18n
             lang_data = load_file(file)
             next if lang_data.raw.nil?
 
-            @translations[lang] ||= {} of String => YAML::Type
-            @translations[lang].merge!(self.class.normalize(lang_data.as_h))
+            @translations[lang] ||= {} of String => YAML::Any
+            @translations[lang].merge!(self.class.normalize(lang_data))
             @available_locales << lang unless @available_locales.includes?(lang)
           end
         else
@@ -54,7 +54,7 @@ module I18n
           )
         end
 
-        return tr[iter].to_s if tr && iter && tr.is_a? Array(YAML::Type)
+        return tr[iter].to_s if tr && iter && tr.is_a?(YAML::Any)
 
         tr = tr.to_s
         tr = tr.sub(/\%{count}/, count) if count
@@ -182,16 +182,18 @@ module I18n
         end
       end
 
-      def self.normalize(data : Hash, path : String = "", final = Hash(String, YAML::Type).new)
-        data.keys.each do |k|
+      def self.normalize(data : YAML::Any, path : String = "", final = Hash(String, YAML::Any).new)
+        data.as_h.keys.each do |k|
           newp = path.size == 0 ? k.to_s : path + "." + k.to_s
           newdata = data[k]
-          if newdata.is_a?(Hash)
+
+          if newdata.as_h?
             normalize(newdata, newp, final)
           else
             final[newp] = newdata
           end
         end
+
         final
       end
     end
