@@ -180,6 +180,14 @@ __formats__:
 I18n.translate("__formats__.date.day_names", iter: 2) "Tuesday"
 ```
 
+### Embedding translations inside your binary
+
+You can embed translations inside your binary by using the following macro call:
+
+```crystal
+I18n::Backend::Yaml.embed(["some/locale/directory", "some/other/locale/directory"])
+```
+
 ## Development
 
 TODO :
