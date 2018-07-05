@@ -15,6 +15,6 @@ files = Dir.glob "#{dir}/*.yml" do |file|
   puts "lang_data = ::YAML.parse <<-I18nENDTOKEN"
   puts content
   puts "I18nENDTOKEN"
-  puts "backend.translations[\"#{lang}\"] = I18n::Backend::Yaml.normalize(lang_data.as_h)"
+  puts "backend.translations[\"#{lang}\"] = I18n::Backend::Yaml.normalize(lang_data)"
   puts "backend.available_locales << \"#{lang}\""
 end
