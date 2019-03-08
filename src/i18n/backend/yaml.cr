@@ -40,7 +40,7 @@ module I18n
       end
 
       def translate(locale : String, key : String, options : Hash | NamedTuple? = EMPTY_HASH, count = nil, default = nil, iter = nil) : String
-        key += count == 1 ? ".one" : ".other" if count
+        key += ".#{I18n.plural_rule.call(count)}" if count
 
         tr = @translations[locale][key]? || default
         unless tr

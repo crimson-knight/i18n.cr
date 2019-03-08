@@ -31,7 +31,7 @@ module I18n
     end
   end
 
-  define_delegators(%w(locale backend default_locale available_locales default_separator exception_handler load_path))
+  define_delegators(%w(locale backend default_locale available_locales default_separator exception_handler load_path plural_rule))
 
   def translate(key : String, options : Hash | NamedTuple? = nil, force_locale = config.locale, count = nil, default = nil, iter = nil) : String
     raise I18n::ArgumentError.new if key.empty?

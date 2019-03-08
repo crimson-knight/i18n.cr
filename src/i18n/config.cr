@@ -4,6 +4,7 @@ module I18n
   class Config
     @locale : String?
     @@backend : Backend::Base?
+    @plural_rule : Proc(Int32, Symbol)?
 
     # The only configuration value that is not global and scoped to thread is :locale.
     # It defaults to the default_locale.
@@ -48,6 +49,18 @@ module I18n
     # Sets the current default scope separator.
     def default_separator=(separator)
       @@default_separator = separator
+    end
+
+    def plural_rule
+      @plural_rule ||= default_plural_rule
+    end
+
+    def plural_rule=(rule)
+      @plural_rule = rule
+    end
+
+    def default_plural_rule
+      ->(n : Int32) { n == 1 ? :one : :other }
     end
 
     # Returns the current exception handler. Defaults to an instance of
