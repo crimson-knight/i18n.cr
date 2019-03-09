@@ -4,6 +4,7 @@ module I18n
   class Config
     @locale : String?
     @@backend : Backend::Base?
+    @plural_rules = Hash(String, Proc(Int32, Symbol)).new(->(n : Int32) { n == 1 ? :one : :other })
 
     # The only configuration value that is not global and scoped to thread is :locale.
     # It defaults to the default_locale.
@@ -14,6 +15,10 @@ module I18n
     # Sets the current locale pseudo-globally, i.e. in the Thread.current hash.
     def locale=(locale)
       @locale = locale
+    end
+
+    def plural_rules
+      @plural_rules
     end
 
     # Returns the available locales
