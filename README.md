@@ -173,7 +173,7 @@ To store several alternative objects under one localization key they could be ju
 ```yaml
 __formats__:
   date:
-    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    day_names: [~, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
 ```
 
 ```crystal

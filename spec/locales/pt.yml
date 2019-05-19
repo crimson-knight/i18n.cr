@@ -45,21 +45,23 @@ __formats__:
         - Nov
         - Dez
       day_names:
-        - Domingo
+        -
         - Segunda
         - Terça
         - Quarta
         - Quinta
         - Sexta
         - Sábado
+        - Domingo
       abbr_day_names:
-        - Dom
+        -
         - Seg
         - Ter
         - Qua
         - Qui
         - Sex
         - Sáb
+        - Dom
     time:
       formats:
         default: '%H:%M:%S'

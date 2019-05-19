@@ -104,8 +104,8 @@ module I18n
       #       month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
       #       abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
       #
-      #       day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
-      #       abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+      #       day_names: [~, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+      #       abbr_day_names: [~, Mon, Tue, Wed, Thu, Fri, Sat, Sun]
       #
       #       time:
       #         formats:
