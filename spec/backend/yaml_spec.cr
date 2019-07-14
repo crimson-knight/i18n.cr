@@ -43,7 +43,7 @@ describe I18n::Backend::Yaml do
     it { backend.translate("en", "messages.with_2_arguments", {attr: "a", attr2: "b"}).should eq("a and b") }
     it { backend.translate("pt", "hello").should(eq("olá")) }
 
-    it { 
+    it {
       # this usage is not recommended
       backend.translate("pt", "__formats__.date.day_names", iter: 1).should eq("Terça")
     }

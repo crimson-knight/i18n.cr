@@ -123,8 +123,8 @@ module I18n
         format = translate(locale, base_key)
         format = format.to_s.gsub(/%[aAbBpP]/) do |match|
           case match
-          when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.value() - 1)
-          when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.value() - 1)
+          when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.value - 1)
+          when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.value - 1)
           when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month - 1)
           when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month - 1)
           when "%p" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").upcase if object.responds_to? :hour
