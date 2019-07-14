@@ -88,7 +88,7 @@ locales
 |------pt.yml
 ```
 
-This way you can separate model related translations from the view ones. To require all described subfolders at once use `**` - `I18n.load_path += ["locals/**/*.yml"]`
+This way you can separate model related translations from the view ones. To require all described subfolders at once use `**` - `I18n.load_path += ["locals/**/"]`
 
 #### Date/Time Formats
 
