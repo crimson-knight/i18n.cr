@@ -17,7 +17,6 @@ __formats__:
         default: '%Y-%m-%d'
         long: '%A, %d de %B %Y'
       month_names:
-        -
         - Janeiro
         - Fevereiro
         - Março
@@ -31,7 +30,6 @@ __formats__:
         - Novembro
         - Dezembro
       abbr_month_names:
-        -
         - Jan
         - Fev
         - Mar
@@ -45,21 +43,21 @@ __formats__:
         - Nov
         - Dez
       day_names:
-        - Domingo
         - Segunda
         - Terça
         - Quarta
         - Quinta
         - Sexta
         - Sábado
+        - Domingo
       abbr_day_names:
-        - Dom
         - Seg
         - Ter
         - Qua
         - Qui
         - Sex
         - Sáb
+        - Dom
     time:
       formats:
         default: '%H:%M:%S'

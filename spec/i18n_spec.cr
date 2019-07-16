@@ -34,7 +34,7 @@ describe I18n do
   end
 
   describe ".localize" do
-    time = Time.now
+    time = Time.local(2019, 7, 14, 20, 1, 3)
 
     it "format number" do
       I18n.localize(1234).should(eq("1.234"))
@@ -49,18 +49,18 @@ describe I18n do
     end
 
     it "time default format" do
-      I18n.localize(time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
+      I18n.localize(time, scope: :time).should(eq("20:01:03"))
     end
 
     it "date default format" do
-      I18n.localize(time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
+      I18n.localize(time, scope: :date).should(eq("2019-07-14"))
     end
 
     it "date long format" do
-      I18n.localize(time, scope: :date, force_locale: "en", format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
+      I18n.localize(time, scope: :date, force_locale: "en", format: "long").should(eq("Sunday, 14 of July 2019"))
     end
 
-    it { I18n.localize(time, "en", :date, "long").should(eq(time.to_s("%A, %d of %B %Y"))) }
+    it { I18n.localize(time, "en", :date, "long").should(eq("Sunday, 14 of July 2019")) }
   end
 
   describe ".with_locale" do

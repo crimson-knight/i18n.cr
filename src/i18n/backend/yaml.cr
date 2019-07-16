@@ -21,6 +21,7 @@ module I18n
         {% end %}
       end
 
+      # Read files, normalize and merge all the translations
       def load(*args)
         if args[0].is_a?(String)
           files = Dir.glob(args[0] + "/*.yml")
@@ -67,9 +68,11 @@ module I18n
 
       # Localize a number or a currency
       # Use the format if given
-      # scope can be one of :number ( default ), :currency
+      # scope can be one of `:number` ( default ), `:currency`
+      #
       # Following keys are required :
       #
+      # ```yaml
       # __formats__:
       #       number:
       #         decimal_separator: ','
@@ -79,6 +82,7 @@ module I18n
       #         symbol: '€'
       #       name: 'euro'
       #       format: '%s€'
+      # ```
       def localize(locale : String, object : Number, scope = :number, format = nil) : String
         return object.to_s if scope != :number && scope != :currency
 
@@ -90,36 +94,39 @@ module I18n
         number
       end
 
-      # Localize a date or a datetime
-      # Use the format if given
-      # scope can be one of :time ( default ), :date, :datetime
-      # Following keys are required :
+      # Localize a date or a datetime using the *format* if provided.
+      # *scope* can be one of :time ( default ), :date, :datetime
       #
+      # NOTE: According to ISO 8601, Monday is the first day of the week
+      #
+      # Following keys are required :
+      # ```yaml
       # __formats__:
       #       date:
       #         formats:
       #         default: "%Y-%m-%d"
       #       long: "%A, %d of %B %Y"
       #
-      #       month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
-      #       abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+      #       month_names: [January, February, March, April, May, June, July, August, September, October, November, December]
+      #       abbr_month_names: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
       #
-      #       day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
-      #       abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+      #       day_names: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+      #       abbr_day_names: [Mon, Tue, Wed, Thu, Fri, Sat, Sun]
       #
       #       time:
       #         formats:
       #             default: "%I:%M:%S %p"
+      # ```
       def localize(locale : String, object : Time, scope = :time, format = nil) : String
         base_key = "__formats__." + scope.to_s + (format ? ".formats." + format.to_s : ".formats.default")
 
         format = translate(locale, base_key)
         format = format.to_s.gsub(/%[aAbBpP]/) do |match|
           case match
-          when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.to_i)
-          when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.to_i)
-          when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month)
-          when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month)
+          when "%a" then translate(locale, "__formats__.date.abbr_day_names", iter: object.day_of_week.value - 1)
+          when "%A" then translate(locale, "__formats__.date.day_names", iter: object.day_of_week.value - 1)
+          when "%b" then translate(locale, "__formats__.date.abbr_month_names", iter: object.month - 1)
+          when "%B" then translate(locale, "__formats__.date.month_names", iter: object.month - 1)
           when "%p" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").upcase if object.responds_to? :hour
           when "%P" then translate(locale, "__formats__.time.#{object.hour < 12 ? :am : :pm}").downcase if object.responds_to? :hour
           end
@@ -182,6 +189,7 @@ module I18n
         end
       end
 
+      # Flatten paths
       def self.normalize(data : YAML::Any, path : String = "", final = Hash(String, YAML::Any).new)
         data.as_h.keys.each do |k|
           newp = path.size == 0 ? k.to_s : path + "." + k.to_s

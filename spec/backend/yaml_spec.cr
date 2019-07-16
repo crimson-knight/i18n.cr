@@ -42,7 +42,11 @@ describe I18n::Backend::Yaml do
 
     it { backend.translate("en", "messages.with_2_arguments", {attr: "a", attr2: "b"}).should eq("a and b") }
     it { backend.translate("pt", "hello").should(eq("olá")) }
-    it { backend.translate("pt", "__formats__.date.day_names", iter: 2).should eq("Terça") }
+
+    it {
+      # this usage is not recommended
+      backend.translate("pt", "__formats__.date.day_names", iter: 1).should eq("Terça")
+    }
   end
 
   describe "#localize" do
@@ -62,17 +66,17 @@ describe I18n::Backend::Yaml do
 
     context "with time format" do
       it "time default format" do
-        backend.localize("pt", time, scope: :time).should(eq(time.to_s("%H:%M:%S")))
+        backend.localize("pt", time, scope: :time).should(eq("12:13:14"))
       end
     end
 
     context "with date format" do
       it "date default format" do
-        backend.localize("pt", time, scope: :date).should(eq(time.to_s("%Y-%m-%d")))
+        backend.localize("pt", time, scope: :date).should(eq("2010-10-11"))
       end
 
       it "date long format" do
-        backend.localize("en", time, scope: :date, format: "long").should(eq(time.to_s("%A, %d of %B %Y")))
+        backend.localize("pt", time, scope: :date, format: "long").should(eq("Segunda, 11 de Outubro 2010"))
       end
     end
 

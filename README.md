@@ -3,6 +3,10 @@
 
 Internationalization API
 
+## Breaking changes from 0.2 to 0.3
+- The first day of the week is now Monday according to ISO 8601.
+- The nil value in `month_names` and `abbr_month_names` was removed.
+
 ## Installation
 
 Add this to your application's `shard.yml`:
@@ -101,6 +105,7 @@ I18n.localize(Time.now, scope: :date, format: :long)
 > By default `Time` will be localized with `:time` scope.
 
 To specify formats and all need localization information (like day or month names) fill your file in following way:
+> NOTE: According to ISO 8601, Monday is the first day of the week
 
 ```yaml
 __formats__:
@@ -109,7 +114,6 @@ __formats__:
       default: '%Y-%m-%d' # is used by default
       long: '%A, %d de %B %Y'
     month_names: # long month names
-      -
       - Janeiro
       - Fevereiro
       - Março
@@ -123,16 +127,13 @@ __formats__:
       - Novembro
       - Dezembro
     abbr_month_names: # month abbreviations
-      -
       - Jan
       - Fev
       # ...
     day_names: # fool day names
-      - Domingo
       - Segunda
       # ...
     abbr_day_names: # short day names
-      - Dom
       - Seg
       # ...
 ```
@@ -170,14 +171,16 @@ I18n.translate("message", count: 0) # 0 messages
 
 To store several alternative objects under one localization key they could be just listed in the file and later retrieved using `iter` argument:
 
+> NOTE : The first index is `0`
+
 ```yaml
 __formats__:
   date:
-    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    day_names: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
 ```
 
 ```crystal
-I18n.translate("__formats__.date.day_names", iter: 2) "Tuesday"
+I18n.translate("__formats__.date.day_names", iter: 2)  # >>> "Wednesday"
 ```
 
 ### Embedding translations inside your binary
