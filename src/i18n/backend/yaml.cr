@@ -7,7 +7,7 @@ module I18n
     class Yaml < I18n::Backend::Base
       EMPTY_HASH = {} of String => String
 
-      getter available_locales
+      getter available_locales : Array(String)
       property translations
 
       @translations = Hash(String, Hash(String, YAML::Any)).new
