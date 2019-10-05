@@ -64,11 +64,9 @@ describe I18n do
   end
 
   describe ".with_locale" do
-    Spec.before_each do
-      I18n.locale = "en"
-    end
-
     it "temporarity sets the given locale" do
+      I18n.locale = "en"
+
       I18n.locale.should eq("en")
       I18n.translate("thanks").should eq("thanks")
 
