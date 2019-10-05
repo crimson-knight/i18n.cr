@@ -50,7 +50,7 @@ describe I18n::Backend::Yaml do
   end
 
   describe "#localize" do
-    time = Time.new(2010, 10, 11, 12, 13, 14)
+    time = Time.local(2010, 10, 11, 12, 13, 14)
 
     context "with number format" do
       it { backend.localize("pt", 123).should(eq("123")) }

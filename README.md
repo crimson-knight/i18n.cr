@@ -99,7 +99,7 @@ This way you can separate model related translations from the view ones. To requ
 To localize the time (or date) format you should pass `Time` object to the `I18n.localize`. To pick a specific format path `format` argument:
 
 ```crystal
-I18n.localize(Time.now, scope: :date, format: :long)
+I18n.localize(Time.local, scope: :date, format: :long)
 ```
 
 > By default `Time` will be localized with `:time` scope.
