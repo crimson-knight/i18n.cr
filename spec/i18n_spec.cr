@@ -22,7 +22,7 @@ describe I18n do
     context "with pluralization" do
       context "with default pluralization rule" do
         it "pluralization translate 0" do
-          I18n.translate("new_message", count: 0).should(eq("tem 0 novas mensagens"))
+          I18n.translate("new_message", count: 0).should(eq("não tem mensagens"))
         end
 
         it "pluralization translate 1" do
