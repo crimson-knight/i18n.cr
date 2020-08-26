@@ -22,7 +22,7 @@ describe I18n do
     context "with pluralization" do
       context "with default pluralization rule" do
         it "pluralization translate 0" do
-          I18n.translate("new_message", count: 0).should(eq("não tem mensagens"))
+          I18n.translate("new_message", count: 0).should(eq("tem 0 novas mensagens"))
         end
 
         it "pluralization translate 1" do
@@ -38,7 +38,7 @@ describe I18n do
       context "with complex default pluralization rule" do
         it "pluralization translate 0" do
           tr = I18n.translate("new_message", count: 0, force_locale: "ru")
-          tr.should(eq("у вас нет сообщений"))
+          tr.should(eq("у вас 0 сообщений"))
         end
 
         it "pluralization translate 1" do
@@ -76,7 +76,7 @@ describe I18n do
         end
 
         it "pluralization translate 0" do
-          I18n.translate("new_message", count: 0).should(eq("não tem mensagens"))
+          I18n.translate("new_message", count: 0).should(eq("tem 0 novas mensagens"))
         end
 
         it "pluralization translate 1" do
@@ -89,11 +89,11 @@ describe I18n do
         end
 
         it "pluralization translate 0 with force_locale" do
-          I18n.translate("new_message", count: 0, force_locale: "en").should(eq("you have no messages"))
+          I18n.translate("new_message", count: 0, force_locale: "en").should(eq("you have 0 new messages"))
         end
 
         it "pluralization translate 0 with with_locale" do
-          (I18n.with_locale("en") { I18n.translate("new_message", count: 0) }).should(eq("you have no messages"))
+          (I18n.with_locale("en") { I18n.translate("new_message", count: 0) }).should(eq("you have 0 new messages"))
         end
       end
     end
