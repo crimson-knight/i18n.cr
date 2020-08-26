@@ -5,7 +5,7 @@
 Internationalization API
 
 ## Breaking changes from 0.3 to 0.4
-- Pluralization now can return not only `zero`, `one` and `other`. You can find pluralization rules at `src/i18n/config/plural_rules`
+- Pluralization rules are now fully suites [CLDR convention](http://cldr.unicode.org/index/cldr-spec/plural-rules). Specifically `en` pluralization no more returns `zero`
 
 ## Breaking changes from 0.2 to 0.3
 - The first day of the week is now Monday according to ISO 8601.
@@ -155,9 +155,7 @@ Format accepts any crystal `Time::Format` directives. Also following directives 
 
 #### Pluralization
 
-In many languages — including English — there are only two forms, a singular and a plural, for a given string, e.g. "1 message" and "2 messages". Other languages (Arabic, Japanese, Russian and many more) have different grammars that have additional or fewer plural forms. Thus, the I18n provides a flexible pluralization feature.
-
-By default the translation denoted as `:one` is regarded as singular, and the `:other` is used as plural.
+In many languages — including English — there are only two forms, a singular and a plural, for a given string, e.g. "1 message" and "2 messages". Other languages (Arabic, Japanese, Russian and many more) have different grammars that have additional or fewer plural forms.
 
 The `count` interpolation variable has a special role in that it both is interpolated to the translation and used to pick a pluralization from the translations according to the pluralization rules defined by CLDR:
 
@@ -175,7 +173,7 @@ I18n.translate("message", count: 0) # 0 messages
 
 > `count` should be passed as argument - not inside of `options`. Otherwise regular translation lookup will be applied.
 
-The I18n shard provides a `plural_rules` method that can be used to add locale-specific rules.
+I18n defines default [CLDR rules](http://cldr.unicode.org/index/cldr-spec/plural-rules) for many locales (see `src/i18n/config/plural_rules`), however they can be overwritten:
 
 ```crystal
 I18n.plural_rules["ru"] = ->(n : Int32) {
