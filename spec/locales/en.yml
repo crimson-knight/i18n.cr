@@ -1,6 +1,5 @@
 thanks: thanks
 new_message:
-    "zero"   : "you have no messages"
     "one"    : "you have a message"
     "other"  : 'you have %{count} new messages'
 messages:

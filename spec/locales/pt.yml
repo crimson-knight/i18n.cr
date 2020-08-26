@@ -2,7 +2,6 @@
 hello: olá
 thanks: obrigado
 new_message:
-  zero: não tem mensagens
   one: tem uma nova mensagem
   other: tem %{count} novas mensagens
 __formats__:
