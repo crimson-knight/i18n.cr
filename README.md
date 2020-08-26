@@ -4,6 +4,9 @@
 
 Internationalization API
 
+## Breaking changes from 0.3 to 0.4
+- Pluralization now can return not only `zero`, `one` and `other`. You can find pluralization rules at `src/i18n/config/plural_rules`
+
 ## Breaking changes from 0.2 to 0.3
 - The first day of the week is now Monday according to ISO 8601.
 - The nil value in `month_names` and `abbr_month_names` was removed.
