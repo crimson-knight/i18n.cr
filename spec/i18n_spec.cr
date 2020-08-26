@@ -3,7 +3,7 @@ require "./spec_helper"
 describe I18n do
   describe ".available_profiles" do
     it "should return the available locales" do
-      I18n.available_locales.sort.should eq ["en", "pt"]
+      I18n.available_locales.sort.should eq %w(en pt ru)
     end
   end
 
@@ -32,6 +32,28 @@ describe I18n do
         it "pluralization translate 2" do
           tr = I18n.translate("new_message", count: 2)
           tr.should(eq("tem 2 novas mensagens"))
+        end
+      end
+
+      context "with complex default pluralization rule" do
+        it "pluralization translate 0" do
+          tr = I18n.translate("new_message", count: 0, force_locale: "ru")
+          tr.should(eq("у вас нет сообщений"))
+        end
+
+        it "pluralization translate 1" do
+          tr = I18n.translate("new_message", count: 1, force_locale: "ru")
+          tr.should(eq("у вас 1 сообщение"))
+        end
+
+        it "pluralization translate 2" do
+          tr = I18n.translate("new_message", count: 2, force_locale: "ru")
+          tr.should(eq("у вас 2 сообщения"))
+        end
+
+        it "pluralization translate 11" do
+          tr = I18n.translate("new_message", count: 11, force_locale: "ru")
+          tr.should(eq("у вас 11 сообщений"))
         end
       end
 
