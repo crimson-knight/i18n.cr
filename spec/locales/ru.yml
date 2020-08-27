@@ -1,0 +1,36 @@
+thanks: спасибо
+new_message:
+    "one"    : 'у вас %{count} сообщение'
+    "few"    : 'у вас %{count} сообщения'
+    "many"   : 'у вас %{count} сообщений'
+    "other"  : 'у вас %{count} сообщений'
+messages:
+    with_2_arguments: "%{attr} и %{attr2}"
+    plural:
+        one: "%{count} %{attr}"
+        other: "%{count} %{attr}s"
+
+__formats__:
+    number:
+        decimal_separator: ','
+        precision_separator: '.'
+
+    currency:
+        symbol: '₽'
+        name: 'рубль'
+        format: '%{amount}₽'
+
+    date:
+        formats:
+            default: "%d.%m.%Y"
+            long: "%d.%m.%Y, %A"
+
+        month_names: [Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
+        abbr_month_names: [Янв, Фев, Мар, Апр, Май, Июн, Июл, Авг, Сен, Окт, Ноя, Дек]
+
+        day_names: [Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье]
+        abbr_day_names: [Пн, Вт, Ср, Чт, Пт, Сб, Вс]
+
+    time:
+        formats:
+            default: "%I:%M:%S %p"

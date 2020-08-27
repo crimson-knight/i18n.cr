@@ -1,7 +1,11 @@
 # i18n
+
 [![Build Status](https://travis-ci.org/TechMagister/i18n.cr.svg?branch=master)](https://travis-ci.org/TechMagister/i18n.cr)
 
 Internationalization API
+
+## Breaking changes from 0.3 to 0.4
+- Pluralization rules are now fully suites [CLDR convention](http://cldr.unicode.org/index/cldr-spec/plural-rules). Specifically `en` pluralization no more returns `zero`
 
 ## Breaking changes from 0.2 to 0.3
 - The first day of the week is now Monday according to ISO 8601.
@@ -78,7 +82,7 @@ Putting translations for all parts of your application in one file per locale co
 
 For example, your config/locales directory could look like this:
 
-```
+```console
 locales
 |--defaults
 |----en.yml
@@ -151,7 +155,9 @@ Format accepts any crystal `Time::Format` directives. Also following directives 
 
 #### Pluralization
 
-In English there are only one singular and one plural form for a given string, e.g. "1 message" and "2 messages" - for now yaml backend supports only this. The `count` interpolation variable has a special role in that it both is interpolated to the translation and used to pick a pluralization from the translations according to the pluralization rules defined by CLDR:
+In many languages — including English — there are only two forms, a singular and a plural, for a given string, e.g. "1 message" and "2 messages". Other languages (Arabic, Japanese, Russian and many more) have different grammars that have additional or fewer plural forms.
+
+The `count` interpolation variable has a special role in that it both is interpolated to the translation and used to pick a pluralization from the translations according to the pluralization rules defined by CLDR:
 
 ```yaml
 message:
@@ -166,6 +172,45 @@ I18n.translate("message", count: 0) # 0 messages
 ```
 
 > `count` should be passed as argument - not inside of `options`. Otherwise regular translation lookup will be applied.
+
+I18n defines default [CLDR rules](http://cldr.unicode.org/index/cldr-spec/plural-rules) for many locales (see `src/i18n/config/plural_rules`), however they can be overwritten:
+
+```crystal
+I18n.plural_rules["ru"] = ->(n : Int32) {
+  if n == 0
+    :zero
+  elsif ((n % 10) == 1) && ((n % 100 != 11))
+    # 1, 21, 31, 41, 51, 61...
+    :one
+  elsif ([2, 3, 4].includes?(n % 10) && ![12, 13, 14].includes?(n % 100))
+    # 2-4, 22-24, 32-34...
+    :few
+  elsif ((n % 10) == 0 || ![5, 6, 7, 8, 9].includes?(n % 10) || ![11, 12, 13, 14].includes?(n % 100))
+    # 0, 5-20, 25-30, 35-40...
+    :many
+  else
+    :other
+  end
+}
+```
+
+```yaml
+kid:
+  zero: 'нет детей'
+  one: '%{count} ребенок'
+  few: '%{count} ребенка'
+  many: '%{count} детей'
+  other: '%{count} детей'
+```
+
+```crystal
+I18n.locale = "ru"
+
+I18n.translate("kid", count: 0) # нет детей
+I18n.translate("kid", count: 1) # 1 ребенок
+I18n.translate("kid", count: 2) # 2 ребенка
+I18n.translate("kid", count: 6) # 6 детей
+```
 
 #### Iteration
 

@@ -3,7 +3,7 @@ require "./spec_helper"
 describe I18n do
   describe ".available_profiles" do
     it "should return the available locales" do
-      I18n.available_locales.sort.should eq ["en", "pt"]
+      I18n.available_locales.sort.should eq %w(en pt ru)
     end
   end
 
@@ -20,13 +20,81 @@ describe I18n do
     end
 
     context "with pluralization" do
-      it "pluralization translate 1" do
-        I18n.translate("new_message", count: 1).should(eq("tem uma nova mensagem"))
+      context "with default pluralization rule" do
+        it "pluralization translate 0" do
+          I18n.translate("new_message", count: 0).should(eq("tem 0 novas mensagens"))
+        end
+
+        it "pluralization translate 1" do
+          I18n.translate("new_message", count: 1).should(eq("tem uma nova mensagem"))
+        end
+
+        it "pluralization translate 2" do
+          tr = I18n.translate("new_message", count: 2)
+          tr.should(eq("tem 2 novas mensagens"))
+        end
       end
 
-      it "pluralization translate 2" do
-        tr = I18n.translate("new_message", count: 2)
-        tr.should(eq("tem 2 novas mensagens"))
+      context "with complex default pluralization rule" do
+        it "pluralization translate 0" do
+          tr = I18n.translate("new_message", count: 0, force_locale: "ru")
+          tr.should(eq("у вас 0 сообщений"))
+        end
+
+        it "pluralization translate 1" do
+          tr = I18n.translate("new_message", count: 1, force_locale: "ru")
+          tr.should(eq("у вас 1 сообщение"))
+        end
+
+        it "pluralization translate 2" do
+          tr = I18n.translate("new_message", count: 2, force_locale: "ru")
+          tr.should(eq("у вас 2 сообщения"))
+        end
+
+        it "pluralization translate 11" do
+          tr = I18n.translate("new_message", count: 11, force_locale: "ru")
+          tr.should(eq("у вас 11 сообщений"))
+        end
+      end
+
+      context "with custom pluralization rule" do
+        custom_plural_rule = ->(n : Int32) {
+          case n
+          when 0 then :zero
+          when 1 then :one
+          else        :other
+          end
+        }
+
+        Spec.before_each do
+          I18n.plural_rules["en"] = custom_plural_rule
+          I18n.plural_rules["pt"] = custom_plural_rule
+        end
+
+        Spec.after_each do
+          I18n.plural_rules.clear
+        end
+
+        it "pluralization translate 0" do
+          I18n.translate("new_message", count: 0).should(eq("tem 0 novas mensagens"))
+        end
+
+        it "pluralization translate 1" do
+          I18n.translate("new_message", count: 1).should(eq("tem uma nova mensagem"))
+        end
+
+        it "pluralization translate 2" do
+          tr = I18n.translate("new_message", count: 2)
+          tr.should(eq("tem 2 novas mensagens"))
+        end
+
+        it "pluralization translate 0 with force_locale" do
+          I18n.translate("new_message", count: 0, force_locale: "en").should(eq("you have 0 new messages"))
+        end
+
+        it "pluralization translate 0 with with_locale" do
+          (I18n.with_locale("en") { I18n.translate("new_message", count: 0) }).should(eq("you have 0 new messages"))
+        end
       end
     end
 

@@ -1,9 +1,11 @@
 require "./backend/base"
+require "./config/plural_rules"
 
 module I18n
   class Config
     @locale : String?
     @@backend : Backend::Base?
+    @plural_rules = Hash(String, Proc(Int32, Symbol)).new
 
     # The only configuration value that is not global and scoped to thread is :locale.
     # It defaults to the default_locale.
@@ -14,6 +16,21 @@ module I18n
     # Sets the current locale pseudo-globally, i.e. in the Thread.current hash.
     def locale=(locale)
       @locale = locale
+    end
+
+    def plural_rules
+      @plural_rules
+    end
+
+    # Search for pluralization rule for provided locale
+    def plural_rule_for(locale) : Proc(Int32, Symbol)
+      if DEFAULT_PLURAL_RULES.has_key?(locale)
+        DEFAULT_PLURAL_RULES[locale][:rule]
+      elsif @plural_rules.has_key?(locale)
+        @plural_rules[locale]
+      else
+        COMMON_PLURAL_RULES[:default][:rule]
+      end
     end
 
     # Returns the available locales
