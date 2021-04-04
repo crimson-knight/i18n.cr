@@ -4,6 +4,6 @@ version: 0.3.1
 authors:
   - Arnaud Fernandés <arnaud.fernandes@laposte.net>
 
-crystal: 0.29.0
+crystal: ">= 0.29.0, < 2.0.0"
 
 license: MIT
