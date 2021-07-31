@@ -14,10 +14,8 @@ module I18n
       @available_locales = Array(String).new
 
       macro embed(dirs)
-        {% begin %}
-          {% for dir in dirs %}
-            \{{ run("i18n/backend/yaml_embed", {{dir}}) }}
-          {% end %}
+        {% for dir in dirs %}
+          {{ run("./yaml_embed", dir) }}
         {% end %}
       end
 
