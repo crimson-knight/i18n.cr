@@ -60,10 +60,16 @@ module I18n
         tr = tr.to_s
         tr = tr.sub(/\%{count}/, count) if count
         return tr unless options
+
         options.each do |attr, value|
           tr = tr.gsub(/\%{#{attr}}/, value)
         end
         tr
+      end
+
+      def exists?(locale : String, key : String, count = nil) : Bool
+        key += ".#{I18n.config.plural_rule_for(locale).call(count)}" if count
+        @translations[locale].has_key?(key)
       end
 
       # Localize a number or a currency
@@ -182,11 +188,9 @@ module I18n
       end
 
       private def load_file(filename)
-        begin
-          YAML.parse(File.read(filename))
-        rescue e : YAML::ParseException
-          raise InvalidLocaleData.new(filename, e.inspect)
-        end
+        YAML.parse(File.read(filename))
+      rescue e : YAML::ParseException
+        raise InvalidLocaleData.new(filename, e.inspect)
       end
 
       # Flatten paths

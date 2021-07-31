@@ -1,4 +1,4 @@
-require "../spec_helper.cr"
+require "../spec_helper"
 
 describe I18n::Backend::Yaml do
   backend = I18n::Backend::Yaml.new
@@ -47,6 +47,19 @@ describe I18n::Backend::Yaml do
       # this usage is not recommended
       backend.translate("pt", "__formats__.date.day_names", iter: 1).should eq("Terça")
     }
+  end
+
+  describe "#exists?" do
+    it { backend.exists?("en", "messages.with_2_arguments").should be_true }
+    it { backend.exists?("pt", "hello").should be_true }
+    it { backend.exists?("en", "hello").should be_false }
+
+    context "with pluralization" do
+      it { backend.exists?("pt", "new_message", 1).should be_true }
+      it { backend.exists?("en", "messages.plural", 1).should be_true }
+
+      it { backend.exists?("en", "messages.with_2_arguments", 1).should be_false }
+    end
   end
 
   describe "#localize" do

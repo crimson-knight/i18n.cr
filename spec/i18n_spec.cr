@@ -101,6 +101,20 @@ describe I18n do
     it { I18n.translate("hello").should(eq("olá")) }
   end
 
+  describe ".exists?" do
+    it { I18n.exists?("messages.with_2_arguments", "en").should be_true }
+    it { I18n.exists?("hello").should be_true }
+
+    it { I18n.exists?("hello", "en").should be_false }
+
+    context "with pluralization" do
+      it { I18n.exists?("new_message", count: 1).should be_true }
+      it { I18n.exists?("messages.plural", "en", count: 1).should be_true }
+
+      it { I18n.exists?("messages.with_2_arguments", "en", count: 1).should be_false }
+    end
+  end
+
   describe ".localize" do
     time = Time.local(2019, 7, 14, 20, 1, 3)
 
