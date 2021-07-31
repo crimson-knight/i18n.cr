@@ -8,6 +8,8 @@ describe I18n do
   end
 
   describe ".translate" do
+    it { I18n.translate("hello").should(eq("olá")) }
+
     context "when translation is missing" do
       it "is a missing translation" do
         I18n.translate("missing").should(eq("[Missing translation : pt#missing]"))
@@ -98,7 +100,9 @@ describe I18n do
       end
     end
 
-    it { I18n.translate("hello").should(eq("olá")) }
+    context "with given index for array of translations" do
+      it { I18n.translate("__formats__.date.month_names", iter: 1).should eq("Fevereiro") }
+    end
   end
 
   describe ".localize" do

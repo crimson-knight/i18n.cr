@@ -39,7 +39,7 @@ module I18n
     backend = config.backend
 
     begin
-      backend.translate(force_locale, key, options: options, count: count, default: default)
+      backend.translate(force_locale, key, options, count, default, iter)
     rescue e
       e.inspect
     end
