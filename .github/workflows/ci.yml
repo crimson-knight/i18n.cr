@@ -12,12 +12,19 @@ jobs:
   test:
     strategy:
       fail-fast: false
+      maxtrix:
+        crystal-version:
+          - latest
+          - '0.29.0'
+          - '0.35.1'
 
     runs-on: ubuntu-latest
 
     steps:
       - name: Install Crystal
         uses: oprypin/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal-version }}
 
       - name: Donwload sources
         uses: actions/checkout@v2
