@@ -6,7 +6,17 @@ describe I18n::Backend::Yaml do
   locales.each { |path| backend.load(path) }
 
   describe "%embed" do
-    pending "add" { }
+    it "embeds files from given folder" do
+      with_blank_translations do
+        I18n.backend.translations.clear
+        I18n.backend.translations.should be_empty
+
+        I18n::Backend::Yaml.embed(["spec/locales/subfolder"])
+
+        I18n.backend.translations["en"].has_key?("subfolder_message").should be_true
+        I18n.backend.translations["en"].has_key?("new_message").should be_false
+      end
+    end
   end
 
   describe "#load" do

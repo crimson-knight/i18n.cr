@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  pull_request:
+    branches: "*"
+  push:
+    branches: master
+  schedule:
+    - cron: "0 7 * * 1"
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      maxtrix:
+        crystal-version:
+          - latest
+          - '0.29.0'
+          - '0.35.1'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Crystal
+        uses: oprypin/install-crystal@v1
+        with:
+          crystal: ${{ matrix.crystal-version }}
+
+      - name: Donwload sources
+        uses: actions/checkout@v2
+
+      - name: Check formatting
+        run: crystal tool format --check
+
+      - name: Install dependencies
+        run: shards install
+
+      - name: Run specs
+        run: crystal spec

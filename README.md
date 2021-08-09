@@ -1,6 +1,6 @@
 # i18n
 
-[![Build Status](https://travis-ci.org/TechMagister/i18n.cr.svg?branch=master)](https://travis-ci.org/TechMagister/i18n.cr)
+![Build Status](https://github.com/crimson-knight/i18n.cr/actions/workflows/ci.yml/badge.svg)
 
 Internationalization API
 
