@@ -12,7 +12,7 @@ jobs:
   test:
     strategy:
       fail-fast: false
-      maxtrix:
+      matrix:
         crystal-version:
           - latest
           - '0.29.0'

@@ -4,6 +4,20 @@
 
 Internationalization API
 
+## Changes from 0.4.0 to 0.4.1
+- Supported Crystal versions of >= 0.35
+- add Backend::Yaml#exists? to check whether given translation key exists
+- add I18n.exists?
+- add docs to I18n module public methods (most of wording was taken from the ruby I18n repo)
+- Fixed the iter argument in `translate` to properly return the correct index
+
+Example
+```crystal
+  # Array we are looking into ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  I18n.translate("__formats__.date.day_names", iter: 2) # Returns "Wednesday"
+```
+
+
 ## Breaking changes from 0.3 to 0.4
 - Pluralization rules are now fully suites [CLDR convention](http://cldr.unicode.org/index/cldr-spec/plural-rules). Specifically `en` pluralization no more returns `zero`
 
@@ -18,7 +32,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   i18n:
-    github: TechMagister/i18n.cr
+    github: crimson-knight/i18n.cr
 ```
 
 ## Usage
@@ -245,7 +259,7 @@ TODO :
 
 ## Contributing
 
-1. Fork it ( https://github.com/TechMagister/i18n/fork )
+1. Fork it ( https://github.com/crimson-knight/i18n/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -253,10 +267,11 @@ TODO :
 
 ## Contributors
 
-- [[TechMagister]](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
+- [[crimson-knight]](https://github.com/crimson-knight) Seth Tucker (New owner as of July 2021)
 - [[imdrasil]](https://github.com/imdrasil) Roman Kalnytskyi
 
 Inspiration taken from:
-
 - https://github.com/whity/crystal-i18n
 - https://github.com/mattetti/i18n
+
+Special thank you to [[TechMagister]](https://github.com/Techmagister) for being the original owner and creator of this shard.
