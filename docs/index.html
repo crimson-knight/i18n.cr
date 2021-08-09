@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.36.1">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="i18n">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="i18n">
+  <title>i18n master</title>
+  <script type="text/javascript">
+  CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          i18n
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="i18n/I18n" data-name="i18n">
+      <a href="I18n.html">I18n</a>
+      
+        <ul>
+  
+  <li class=" " data-id="i18n/I18n/ArgumentError" data-name="i18n::argumenterror">
+      <a href="I18n/ArgumentError.html">ArgumentError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="i18n/I18n/Backend" data-name="i18n::backend">
+      <a href="I18n/Backend.html">Backend</a>
+      
+        <ul>
+  
+  <li class=" " data-id="i18n/I18n/Backend/Base" data-name="i18n::backend::base">
+      <a href="I18n/Backend/Base.html">Base</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/Backend/Yaml" data-name="i18n::backend::yaml">
+      <a href="I18n/Backend/Yaml.html">Yaml</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/Config" data-name="i18n::config">
+      <a href="I18n/Config.html">Config</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/ExceptionHandler" data-name="i18n::exceptionhandler">
+      <a href="I18n/ExceptionHandler.html">ExceptionHandler</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/InvalidLocale" data-name="i18n::invalidlocale">
+      <a href="I18n/InvalidLocale.html">InvalidLocale</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/InvalidLocaleData" data-name="i18n::invalidlocaledata">
+      <a href="I18n/InvalidLocaleData.html">InvalidLocaleData</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/InvalidPluralizationData" data-name="i18n::invalidpluralizationdata">
+      <a href="I18n/InvalidPluralizationData.html">InvalidPluralizationData</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/MissingInterpolationArgument" data-name="i18n::missinginterpolationargument">
+      <a href="I18n/MissingInterpolationArgument.html">MissingInterpolationArgument</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/MissingTranslation" data-name="i18n::missingtranslation">
+      <a href="I18n/MissingTranslation.html">MissingTranslation</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/ReservedInterpolationKey" data-name="i18n::reservedinterpolationkey">
+      <a href="I18n/ReservedInterpolationKey.html">ReservedInterpolationKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/UnknownFileType" data-name="i18n::unknownfiletype">
+      <a href="I18n/UnknownFileType.html">UnknownFileType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="i18n" class="anchor" href="#i18n">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>i18n</h1>
+
+<p><img src="https://github.com/crimson-knight/i18n.cr/actions/workflows/ci.yml/badge.svg" alt="Build Status"/></p>
+
+<p>Internationalization API</p>
+
+<h2><a id="changes-from-0.4.0-to-0.4.1" class="anchor" href="#changes-from-0.4.0-to-0.4.1">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Changes from 0.4.0 to 0.4.1</h2>
+
+<ul><li>Supported Crystal versions of >= 0.35</li><li>add Backend::Yaml#exists? to check whether given translation key exists</li><li>add I18n.exists?</li><li>add docs to I18n module public methods (most of wording was taken from the ruby I18n repo)</li><li>Fixed the iter argument in <code>translate</code> to properly return the correct index</li></ul>
+
+<p>Example</p>
+
+<pre><code class="language-crystal">  <span class="c"># Array we are looking into [&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;]</span>
+  <span class="t">I18n</span>.translate(<span class="s">&quot;__formats__.date.day_names&quot;</span>, iter: <span class="n">2</span>) <span class="c"># Returns &quot;Wednesday&quot;</span></code></pre>
+
+<h2><a id="breaking-changes-from-0.3-to-0.4" class="anchor" href="#breaking-changes-from-0.3-to-0.4">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Breaking changes from 0.3 to 0.4</h2>
+
+<ul><li>Pluralization rules are now fully suites <a href="http://cldr.unicode.org/index/cldr-spec/plural-rules">CLDR convention</a>. Specifically <code>en</code> pluralization no more returns <code>zero</code></li></ul>
+
+<h2><a id="breaking-changes-from-0.2-to-0.3" class="anchor" href="#breaking-changes-from-0.2-to-0.3">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Breaking changes from 0.2 to 0.3</h2>
+
+<ul><li>The first day of the week is now Monday according to ISO 8601.</li><li>The nil value in <code>month_names</code> and <code>abbr_month_names</code> was removed.</li></ul>
+
+<h2><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h2>
+
+<p>Add this to your application's <code>shard.yml</code>:</p>
+
+<pre><code class="language-yaml">dependencies:
+  i18n:
+    github: crimson-knight/i18n.cr</code></pre>
+
+<h2><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h2>
+
+<pre><code class="language-crystal"><span class="t">I18n</span>.translate(
+    <span class="s">&quot;some.dot.separated.path&quot;</span>,  <span class="c"># key : String</span>
+    {attr_to_interpolate: <span class="s">&quot;a&quot;</span>}, <span class="c"># options : Hash | NamedTuple? = nil</span>
+    <span class="s">&quot;pt&quot;</span>,                       <span class="c"># force_locale : String = nil</span>
+    <span class="n">2</span>,                          <span class="c"># count : Numeric? = nil</span>
+    <span class="s">&quot;default translation&quot;</span>,      <span class="c"># default : String? = nil</span>
+    <span class="n">nil</span>                         <span class="c"># iter : Int? = nil</span>
+)
+
+<span class="t">I18n</span>.localize(
+    <span class="t">Time</span>.utc_now, <span class="c"># object : _</span>
+    <span class="s">&quot;pt&quot;</span>,         <span class="c"># force_locale : String = I18n.config.locale</span>
+    <span class="n">:time</span>,        <span class="c"># scope : Symbol? = :number</span>
+    <span class="s">&quot;long&quot;</span>        <span class="c"># format : String? = nil</span>
+)</code></pre>
+
+<h3><a id="arguments-interpolation" class="anchor" href="#arguments-interpolation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Arguments interpolation</h3>
+
+<p>Translation may include argument interpolation. For doing this use regular crystal named interpolation placeholder and pass hash or named tuple as a <code>options</code> argument:</p>
+
+<pre><code class="language-yaml">message:
+  new: "New message: %{text}"</code></pre>
+
+<pre><code class="language-crystal"><span class="c"># New message: hello</span>
+<span class="t">I18n</span>.translate(<span class="s">&quot;message.new&quot;</span>, {text: <span class="s">&quot;hello&quot;</span>})
+<span class="t">I18n</span>.translate(<span class="s">&quot;message.new&quot;</span>, {<span class="n">:text</span> => <span class="s">&quot;hello&quot;</span>})
+<span class="t">I18n</span>.translate(<span class="s">&quot;message.new&quot;</span>, {<span class="s">&quot;text&quot;</span> => <span class="s">&quot;hello&quot;</span>})</code></pre>
+
+<p>Also any extra key-value pair will be ignored and missing one will not cause any exception:</p>
+
+<pre><code class="language-crystal"><span class="t">I18n</span>.translate(<span class="s">&quot;message.new&quot;</span>, {message: <span class="s">&quot;hello&quot;</span>}) <span class="c"># New message: %{text}</span></code></pre>
+
+<h3><a id="configuration" class="anchor" href="#configuration">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Configuration</h3>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;i18n&quot;</span>
+
+<span class="t">I18n</span>.load_path += [<span class="s">&quot;spec/locales&quot;</span>]
+<span class="t">I18n</span>.init <span class="c"># This will load locales from all specified locations</span>
+
+<span class="t">I18n</span>.default_locale <span class="o">=</span> <span class="s">&quot;pt&quot;</span> <span class="c"># default can be set after loading translations</span></code></pre>
+
+<p>There is a <a href="https://github.com/TechMagister/kemalyst-i18n">handler</a> for Kemalyst that bring I18n configuration.</p>
+
+<h3><a id="note-on-yaml-backend" class="anchor" href="#note-on-yaml-backend">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Note on YAML Backend</h3>
+
+<p>Putting translations for all parts of your application in one file per locale could be hard to manage. You can store these files in a hierarchy which makes sense to you.</p>
+
+<p>For example, your config/locales directory could look like this:</p>
+
+<pre><code class="language-console">locales
+|--defaults
+|----en.yml
+|----pt.yml
+|--models
+|----en.yml
+|----pt.yml
+|--views
+|----users
+|------en.yml
+|------pt.yml</code></pre>
+
+<p>This way you can separate model related translations from the view ones. To require all described subfolders at once use <code>**</code> - <code>I18n.load_path += ["locals/**/"]</code></p>
+
+<h4><a id="datetime-formats" class="anchor" href="#datetime-formats">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Date/Time Formats</h4>
+
+<p>To localize the time (or date) format you should pass <code>Time</code> object to the <code>I18n.localize</code>. To pick a specific format path <code>format</code> argument:</p>
+
+<pre><code class="language-crystal"><span class="t">I18n</span>.localize(<span class="t">Time</span>.local, scope: <span class="n">:date</span>, format: <span class="n">:long</span>)</code></pre>
+
+<blockquote>By default <code>Time</code> will be localized with <code>:time</code> scope.</blockquote>
+
+<p>To specify formats and all need localization information (like day or month names) fill your file in following way:</p>
+
+<blockquote>NOTE: According to ISO 8601, Monday is the first day of the week</blockquote>
+
+<pre><code class="language-yaml">__formats__:
+  date:
+    formats:
+      default: '%Y-%m-%d' # is used by default
+      long: '%A, %d de %B %Y'
+    month_names: # long month names
+      - Janeiro
+      - Fevereiro
+      - Março
+      - Abril
+      - Maio
+      - Junho
+      - Julho
+      - Agosto
+      - Setembro
+      - Outubro
+      - Novembro
+      - Dezembro
+    abbr_month_names: # month abbreviations
+      - Jan
+      - Fev
+      # ...
+    day_names: # fool day names
+      - Segunda
+      # ...
+    abbr_day_names: # short day names
+      - Seg
+      # ...</code></pre>
+
+<p>Format accepts any crystal <code>Time::Format</code> directives. Also following directives will be automatically localized:</p>
+
+<p>| Directive | Description | Key |
+|---|---|---|
+| <code>%a</code> | short day name | <code>date.abbr_day_names</code> |
+| <code>%A</code> | day name | <code>date.day_names</code> |
+| <code>%b</code> | short month name | <code>date.abbr_month_names</code> |
+| <code>%B</code> | month name | <code>date.month_names</code> |
+| <code>%p</code> | am-pm (lowercase) | <code>time.am</code>/<code>time.pm</code> |
+| <code>%P</code> | AM-PM (uppercase) | <code>time.am</code>/<code>time.pm</code> |</p>
+
+<h4><a id="pluralization" class="anchor" href="#pluralization">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Pluralization</h4>
+
+<p>In many languages — including English — there are only two forms, a singular and a plural, for a given string, e.g. "1 message" and "2 messages". Other languages (Arabic, Japanese, Russian and many more) have different grammars that have additional or fewer plural forms.</p>
+
+<p>The <code>count</code> interpolation variable has a special role in that it both is interpolated to the translation and used to pick a pluralization from the translations according to the pluralization rules defined by CLDR:</p>
+
+<pre><code class="language-yaml">message:
+  one: "%{count} message"
+  other: "%{count} messages"</code></pre>
+
+<pre><code class="language-crystal"><span class="t">I18n</span>.translate(<span class="s">&quot;message&quot;</span>, count: <span class="n">1</span>) <span class="c"># 1 message</span>
+<span class="t">I18n</span>.translate(<span class="s">&quot;message&quot;</span>, count: <span class="n">2</span>) <span class="c"># 2 messages</span>
+<span class="t">I18n</span>.translate(<span class="s">&quot;message&quot;</span>, count: <span class="n">0</span>) <span class="c"># 0 messages</span></code></pre>
+
+<blockquote><code>count</code> should be passed as argument - not inside of <code>options</code>. Otherwise regular translation lookup will be applied.</blockquote>
+
+<p>I18n defines default <a href="http://cldr.unicode.org/index/cldr-spec/plural-rules">CLDR rules</a> for many locales (see <code>src/i18n/config/plural_rules</code>), however they can be overwritten:</p>
+
+<pre><code class="language-crystal"><span class="t">I18n</span>.plural_rules[<span class="s">&quot;ru&quot;</span>] <span class="o">=</span> ->(n : <span class="t">Int32</span>) {
+  <span class="k">if</span> n <span class="o">==</span> <span class="n">0</span>
+    <span class="n">:zero</span>
+  <span class="k">elsif</span> ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span> <span class="o">!=</span> <span class="n">11</span>))
+    <span class="c"># 1, 21, 31, 41, 51, 61...</span>
+    <span class="n">:one</span>
+  <span class="k">elsif</span> ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>) && <span class="o">!</span>[<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))
+    <span class="c"># 2-4, 22-24, 32-34...</span>
+    <span class="n">:few</span>
+  <span class="k">elsif</span> ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span> || <span class="o">!</span>[<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>) || <span class="o">!</span>[<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))
+    <span class="c"># 0, 5-20, 25-30, 35-40...</span>
+    <span class="n">:many</span>
+  <span class="k">else</span>
+    <span class="n">:other</span>
+  <span class="k">end</span>
+}</code></pre>
+
+<pre><code class="language-yaml">kid:
+  zero: 'нет детей'
+  one: '%{count} ребенок'
+  few: '%{count} ребенка'
+  many: '%{count} детей'
+  other: '%{count} детей'</code></pre>
+
+<pre><code class="language-crystal"><span class="t">I18n</span>.locale <span class="o">=</span> <span class="s">&quot;ru&quot;</span>
+
+<span class="t">I18n</span>.translate(<span class="s">&quot;kid&quot;</span>, count: <span class="n">0</span>) <span class="c"># нет детей</span>
+<span class="t">I18n</span>.translate(<span class="s">&quot;kid&quot;</span>, count: <span class="n">1</span>) <span class="c"># 1 ребенок</span>
+<span class="t">I18n</span>.translate(<span class="s">&quot;kid&quot;</span>, count: <span class="n">2</span>) <span class="c"># 2 ребенка</span>
+<span class="t">I18n</span>.translate(<span class="s">&quot;kid&quot;</span>, count: <span class="n">6</span>) <span class="c"># 6 детей</span></code></pre>
+
+<h4><a id="iteration" class="anchor" href="#iteration">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Iteration</h4>
+
+<p>To store several alternative objects under one localization key they could be just listed in the file and later retrieved using <code>iter</code> argument:</p>
+
+<blockquote>NOTE : The first index is <code>0</code></blockquote>
+
+<pre><code class="language-yaml">__formats__:
+  date:
+    day_names: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]</code></pre>
+
+<pre><code class="language-crystal"><span class="t">I18n</span>.translate(<span class="s">&quot;__formats__.date.day_names&quot;</span>, iter: <span class="n">2</span>)  <span class="c"># &gt;&gt;&gt; &quot;Wednesday&quot;</span></code></pre>
+
+<h3><a id="embedding-translations-inside-your-binary" class="anchor" href="#embedding-translations-inside-your-binary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Embedding translations inside your binary</h3>
+
+<p>You can embed translations inside your binary by using the following macro call:</p>
+
+<pre><code class="language-crystal"><span class="t">I18n</span><span class="t">::</span><span class="t">Backend</span><span class="t">::</span><span class="t">Yaml</span>.embed([<span class="s">&quot;some/locale/directory&quot;</span>, <span class="s">&quot;some/other/locale/directory&quot;</span>])</code></pre>
+
+<h2><a id="development" class="anchor" href="#development">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Development</h2>
+
+<p><span class="flag orange">TODO</span>  :</p>
+
+<ul><li>[ ] Add more backends ( Database, json based, ruby based ( why not ? ))</li><li>[ ] others ( there is always something to add ... or remove )</li></ul>
+
+<h2><a id="contributing" class="anchor" href="#contributing">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributing</h2>
+
+<ol><li>Fork it ( https://github.com/crimson-knight/i18n/fork )</li><li>Create your feature branch (git checkout -b my-new-feature)</li><li>Commit your changes (git commit -am 'Add some feature')</li><li>Push to the branch (git push origin my-new-feature)</li><li>Create a new Pull Request</li></ol>
+
+<h2><a id="contributors" class="anchor" href="#contributors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributors</h2>
+
+<ul><li><a href="https://github.com/crimson-knight">[crimson-knight</a> Seth Tucker (New owner as of July 2021)</li><li><a href="https://github.com/imdrasil">[imdrasil</a> Roman Kalnytskyi</li></ul>
+
+<p>Inspiration taken from:</p>
+
+<ul><li>https://github.com/whity/crystal-i18n</li><li>https://github.com/mattetti/i18n</li></ul>
+
+<p>Special thank you to <a href="https://github.com/Techmagister">[TechMagister</a> for being the original owner and creator of this shard.</p>
+</div>
+</body>
+</html>

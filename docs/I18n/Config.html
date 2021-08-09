@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.36.1">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="i18n">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="i18n">
+  <title>I18n::Config - i18n master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          i18n
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="i18n/I18n" data-name="i18n">
+      <a href="../I18n.html">I18n</a>
+      
+        <ul>
+  
+  <li class=" " data-id="i18n/I18n/ArgumentError" data-name="i18n::argumenterror">
+      <a href="../I18n/ArgumentError.html">ArgumentError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="i18n/I18n/Backend" data-name="i18n::backend">
+      <a href="../I18n/Backend.html">Backend</a>
+      
+        <ul>
+  
+  <li class=" " data-id="i18n/I18n/Backend/Base" data-name="i18n::backend::base">
+      <a href="../I18n/Backend/Base.html">Base</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/Backend/Yaml" data-name="i18n::backend::yaml">
+      <a href="../I18n/Backend/Yaml.html">Yaml</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" current" data-id="i18n/I18n/Config" data-name="i18n::config">
+      <a href="../I18n/Config.html">Config</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/ExceptionHandler" data-name="i18n::exceptionhandler">
+      <a href="../I18n/ExceptionHandler.html">ExceptionHandler</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/InvalidLocale" data-name="i18n::invalidlocale">
+      <a href="../I18n/InvalidLocale.html">InvalidLocale</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/InvalidLocaleData" data-name="i18n::invalidlocaledata">
+      <a href="../I18n/InvalidLocaleData.html">InvalidLocaleData</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/InvalidPluralizationData" data-name="i18n::invalidpluralizationdata">
+      <a href="../I18n/InvalidPluralizationData.html">InvalidPluralizationData</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/MissingInterpolationArgument" data-name="i18n::missinginterpolationargument">
+      <a href="../I18n/MissingInterpolationArgument.html">MissingInterpolationArgument</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/MissingTranslation" data-name="i18n::missingtranslation">
+      <a href="../I18n/MissingTranslation.html">MissingTranslation</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/ReservedInterpolationKey" data-name="i18n::reservedinterpolationkey">
+      <a href="../I18n/ReservedInterpolationKey.html">ReservedInterpolationKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="i18n/I18n/UnknownFileType" data-name="i18n::unknownfiletype">
+      <a href="../I18n/UnknownFileType.html">UnknownFileType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> I18n::Config
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../I18n/Config.html">I18n::Config</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L5" target="_blank">
+        i18n/config.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config/plural_rules.cr#L2" target="_blank">
+        i18n/config/plural_rules.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="COMMON_PLURAL_RULES">
+        <strong>COMMON_PLURAL_RULES</strong> = <code>{default: {keys: [<span class="n">:one</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : <span class="n">:other</span>
+<span class="k">end</span>}, one_two_other: {keys: [<span class="n">:one</span>, <span class="n">:two</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : n <span class="o">==</span> <span class="n">2</span> ? <span class="n">:two</span> : <span class="n">:other</span>
+<span class="k">end</span>}, other_only: {keys: [<span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  <span class="n">:other</span>
+<span class="k">end</span>}}</code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DEFAULT_PLURAL_RULES">
+        <strong>DEFAULT_PLURAL_RULES</strong> = <code>{<span class="s">&quot;af&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;am&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ar&quot;</span> => {keys: [<span class="n">:zero</span>, <span class="n">:one</span>, <span class="n">:two</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">0</span> ? <span class="n">:zero</span> : n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : n <span class="o">==</span> <span class="n">2</span> ? <span class="n">:two</span> : [<span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>, <span class="n">10</span>].includes?(n <span class="o">%</span> <span class="n">100</span>) ? <span class="n">:few</span> : [<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>, <span class="n">15</span>, <span class="n">16</span>, <span class="n">17</span>, <span class="n">18</span>, <span class="n">19</span>, <span class="n">20</span>, <span class="n">21</span>, <span class="n">22</span>, <span class="n">23</span>, <span class="n">24</span>, <span class="n">25</span>, <span class="n">26</span>, <span class="n">27</span>, <span class="n">28</span>, <span class="n">29</span>, <span class="n">30</span>, <span class="n">31</span>, <span class="n">32</span>, <span class="n">33</span>, <span class="n">34</span>, <span class="n">35</span>, <span class="n">36</span>, <span class="n">37</span>, <span class="n">38</span>, <span class="n">39</span>, <span class="n">40</span>, <span class="n">41</span>, <span class="n">42</span>, <span class="n">43</span>, <span class="n">44</span>, <span class="n">45</span>, <span class="n">46</span>, <span class="n">47</span>, <span class="n">48</span>, <span class="n">49</span>, <span class="n">50</span>, <span class="n">51</span>, <span class="n">52</span>, <span class="n">53</span>, <span class="n">54</span>, <span class="n">55</span>, <span class="n">56</span>, <span class="n">57</span>, <span class="n">58</span>, <span class="n">59</span>, <span class="n">60</span>, <span class="n">61</span>, <span class="n">62</span>, <span class="n">63</span>, <span class="n">64</span>, <span class="n">65</span>, <span class="n">66</span>, <span class="n">67</span>, <span class="n">68</span>, <span class="n">69</span>, <span class="n">70</span>, <span class="n">71</span>, <span class="n">72</span>, <span class="n">73</span>, <span class="n">74</span>, <span class="n">75</span>, <span class="n">76</span>, <span class="n">77</span>, <span class="n">78</span>, <span class="n">79</span>, <span class="n">80</span>, <span class="n">81</span>, <span class="n">82</span>, <span class="n">83</span>, <span class="n">84</span>, <span class="n">85</span>, <span class="n">86</span>, <span class="n">87</span>, <span class="n">88</span>, <span class="n">89</span>, <span class="n">90</span>, <span class="n">91</span>, <span class="n">92</span>, <span class="n">93</span>, <span class="n">94</span>, <span class="n">95</span>, <span class="n">96</span>, <span class="n">97</span>, <span class="n">98</span>, <span class="n">99</span>].includes?(n <span class="o">%</span> <span class="n">100</span>) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;az&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;be&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span>) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;bg&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;bh&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;bn&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;bo&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;bs&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span>) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;ca&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;cs&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : [<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n) ? <span class="n">:few</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;cy&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:two</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : n <span class="o">==</span> <span class="n">2</span> ? <span class="n">:two</span> : (n <span class="o">==</span> <span class="n">8</span>) || (n <span class="o">==</span> <span class="n">11</span>) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;da&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;de&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;dz&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;el&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;en&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;eo&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;es&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;et&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;eu&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;fa&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;fi&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;fil&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;fo&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;fr&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;fur&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;fy&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ga&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:one_two_other</span>], <span class="s">&quot;gl&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;gu&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;guw&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ha&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;he&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;hi&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;hr&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span>) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;hu&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;id&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;is&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;it&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;iw&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ja&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;jv&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;ka&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;km&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;kn&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;ko&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;ku&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;lb&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ln&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;lt&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && (<span class="o">!</span>([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>, <span class="n">15</span>, <span class="n">16</span>, <span class="n">17</span>, <span class="n">18</span>, <span class="n">19</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>, <span class="n">15</span>, <span class="n">16</span>, <span class="n">17</span>, <span class="n">18</span>, <span class="n">19</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;lv&quot;</span> => {keys: [<span class="n">:zero</span>, <span class="n">:one</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">0</span> ? <span class="n">:zero</span> : ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;mg&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;mk&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  (n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;ml&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;mn&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;mo&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;mr&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ms&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;mt&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : [<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>, <span class="n">10</span>].includes?(n <span class="o">%</span> <span class="n">100</span>) ? <span class="n">:few</span> : [<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>, <span class="n">15</span>, <span class="n">16</span>, <span class="n">17</span>, <span class="n">18</span>, <span class="n">19</span>].includes?(n <span class="o">%</span> <span class="n">100</span>) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;my&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;nah&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;nb&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ne&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;nl&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;nn&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;no&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;nso&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;oc&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;om&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;or&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;pa&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;pap&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;pl&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">!=</span> <span class="n">1</span>) && ([<span class="n">0</span>, <span class="n">1</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;ps&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;pt&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;pt-PT&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ro&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;ru&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span>) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;se&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:one_two_other</span>], <span class="s">&quot;sh&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span>) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;sk&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  n <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : [<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n) ? <span class="n">:few</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;sl&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:two</span>, <span class="n">:few</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  (n <span class="o">%</span> <span class="n">100</span>) <span class="o">==</span> <span class="n">1</span> ? <span class="n">:one</span> : (n <span class="o">%</span> <span class="n">100</span>) <span class="o">==</span> <span class="n">2</span> ? <span class="n">:two</span> : [<span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">100</span>) ? <span class="n">:few</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;sma&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:one_two_other</span>], <span class="s">&quot;smi&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:one_two_other</span>], <span class="s">&quot;smj&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:one_two_other</span>], <span class="s">&quot;smn&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:one_two_other</span>], <span class="s">&quot;sms&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:one_two_other</span>], <span class="s">&quot;so&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;sq&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;sr&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span>) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;sv&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;sw&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;ta&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;te&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;th&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;ti&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;tk&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;tl&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;to&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;tr&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;uk&quot;</span> => {keys: [<span class="n">:one</span>, <span class="n">:few</span>, <span class="n">:many</span>, <span class="n">:other</span>], rule: ->(n : <span class="t">Int32</span>) <span class="k">do</span>
+  ((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">1</span>) && ((n <span class="o">%</span> <span class="n">100</span>) <span class="o">!=</span> <span class="n">11</span>) ? <span class="n">:one</span> : ([<span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>].includes?(n <span class="o">%</span> <span class="n">10</span>)) && (<span class="o">!</span>([<span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>))) ? <span class="n">:few</span> : (((n <span class="o">%</span> <span class="n">10</span>) <span class="o">==</span> <span class="n">0</span>) || ([<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>, <span class="n">8</span>, <span class="n">9</span>].includes?(n <span class="o">%</span> <span class="n">10</span>))) || ([<span class="n">11</span>, <span class="n">12</span>, <span class="n">13</span>, <span class="n">14</span>].includes?(n <span class="o">%</span> <span class="n">100</span>)) ? <span class="n">:many</span> : <span class="n">:other</span>
+<span class="k">end</span>}, <span class="s">&quot;ur&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;vi&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;wa&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>], <span class="s">&quot;yo&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;zh&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:other_only</span>], <span class="s">&quot;zu&quot;</span> => <span class="t">COMMON_PLURAL_RULES</span>[<span class="n">:default</span>]}</code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#available_locales:Array(String)-instance-method" class="signature"><strong>#available_locales</strong> : Array(String)</a>
+        
+          <div class="summary"><p>Returns the available locales</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#backend-instance-method" class="signature"><strong>#backend</strong></a>
+        
+          <div class="summary"><p>Returns the current backend.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#backend=(backend)-instance-method" class="signature"><strong>#backend=</strong>(backend)</a>
+        
+          <div class="summary"><p>Sets the current backend.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#default_locale-instance-method" class="signature"><strong>#default_locale</strong></a>
+        
+          <div class="summary"><p>Returns the current default locale.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#default_locale=(new_default:String)-instance-method" class="signature"><strong>#default_locale=</strong>(new_default : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#default_separator-instance-method" class="signature"><strong>#default_separator</strong></a>
+        
+          <div class="summary"><p>Returns the current default scope separator.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#default_separator=(separator)-instance-method" class="signature"><strong>#default_separator=</strong>(separator)</a>
+        
+          <div class="summary"><p>Sets the current default scope separator.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exception_handler-instance-method" class="signature"><strong>#exception_handler</strong></a>
+        
+          <div class="summary"><p>Returns the current exception handler.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exception_handler=(exception_handler)-instance-method" class="signature"><strong>#exception_handler=</strong>(exception_handler)</a>
+        
+          <div class="summary"><p>Sets the exception handler.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#load_path-instance-method" class="signature"><strong>#load_path</strong></a>
+        
+          <div class="summary"><p>Allow clients to register paths providing translation data sources.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#load_path=(load_path)-instance-method" class="signature"><strong>#load_path=</strong>(load_path)</a>
+        
+          <div class="summary"><p>Sets the load path instance.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#locale-instance-method" class="signature"><strong>#locale</strong></a>
+        
+          <div class="summary"><p>The only configuration value that is not global and scoped to thread is :locale.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#locale=(locale)-instance-method" class="signature"><strong>#locale=</strong>(locale)</a>
+        
+          <div class="summary"><p>Sets the current locale pseudo-globally, i.e.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plural_rule_for(locale):Proc(Int32,Symbol)-instance-method" class="signature"><strong>#plural_rule_for</strong>(locale) : Proc(Int32, Symbol)</a>
+        
+          <div class="summary"><p>Search for pluralization rule for provided locale</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plural_rules:Hash(String,Int32-%3ESymbol)-instance-method" class="signature"><strong>#plural_rules</strong> : Hash(String, Int32 -> Symbol)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="available_locales:Array(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>available_locales</strong> : Array(String)
+
+        <a class="method-permalink" href="#available_locales:Array(String)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the available locales</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="backend-instance-method">
+      <div class="signature">
+        
+        def <strong>backend</strong>
+
+        <a class="method-permalink" href="#backend-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the current backend.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="backend=(backend)-instance-method">
+      <div class="signature">
+        
+        def <strong>backend=</strong>(backend)
+
+        <a class="method-permalink" href="#backend=(backend)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets the current backend. Used to set a custom backend.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="default_locale-instance-method">
+      <div class="signature">
+        
+        def <strong>default_locale</strong>
+
+        <a class="method-permalink" href="#default_locale-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the current default locale. Defaults to :'en'</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L52" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="default_locale=(new_default:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>default_locale=</strong>(new_default : String)
+
+        <a class="method-permalink" href="#default_locale=(new_default:String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="default_separator-instance-method">
+      <div class="signature">
+        
+        def <strong>default_separator</strong>
+
+        <a class="method-permalink" href="#default_separator-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the current default scope separator. Defaults to '.'</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L61" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="default_separator=(separator)-instance-method">
+      <div class="signature">
+        
+        def <strong>default_separator=</strong>(separator)
+
+        <a class="method-permalink" href="#default_separator=(separator)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets the current default scope separator.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L66" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exception_handler-instance-method">
+      <div class="signature">
+        
+        def <strong>exception_handler</strong>
+
+        <a class="method-permalink" href="#exception_handler-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the current exception handler. Defaults to an instance of
+I18n::ExceptionHandler.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L72" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exception_handler=(exception_handler)-instance-method">
+      <div class="signature">
+        
+        def <strong>exception_handler=</strong>(exception_handler)
+
+        <a class="method-permalink" href="#exception_handler=(exception_handler)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets the exception handler.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L77" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="load_path-instance-method">
+      <div class="signature">
+        
+        def <strong>load_path</strong>
+
+        <a class="method-permalink" href="#load_path-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Allow clients to register paths providing translation data sources. The
+backend defines acceptable sources.</p>
+
+<p>E.g. the provided SimpleBackend accepts a list of paths to translation
+files which are either named *.rb and contain plain Ruby Hashes or are
+named *.yml and contain YAML data. So for the SimpleBackend clients may
+register translation files like this:
+  I18n.load_path &lt;&lt; 'path/to/locale/en.yml'</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L89" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="load_path=(load_path)-instance-method">
+      <div class="signature">
+        
+        def <strong>load_path=</strong>(load_path)
+
+        <a class="method-permalink" href="#load_path=(load_path)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets the load path instance. Custom implementations are expected to
+behave like a Ruby Array.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L95" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="locale-instance-method">
+      <div class="signature">
+        
+        def <strong>locale</strong>
+
+        <a class="method-permalink" href="#locale-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>The only configuration value that is not global and scoped to thread is :locale.
+It defaults to the default_locale.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="locale=(locale)-instance-method">
+      <div class="signature">
+        
+        def <strong>locale=</strong>(locale)
+
+        <a class="method-permalink" href="#locale=(locale)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets the current locale pseudo-globally, i.e. in the Thread.current hash.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plural_rule_for(locale):Proc(Int32,Symbol)-instance-method">
+      <div class="signature">
+        
+        def <strong>plural_rule_for</strong>(locale) : Proc(Int32, Symbol)
+
+        <a class="method-permalink" href="#plural_rule_for(locale):Proc(Int32,Symbol)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Search for pluralization rule for provided locale</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plural_rules:Hash(String,Int32->Symbol)-instance-method">
+      <div class="signature">
+        
+        def <strong>plural_rules</strong> : Hash(String, Int32 -> Symbol)
+
+        <a class="method-permalink" href="#plural_rules:Hash(String,Int32-%3ESymbol)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/crimson-knight/i18n.cr/blob/3ace0e59e7f3d223c76dde3ce642791aba4319a0/src/i18n/config.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
