@@ -15,7 +15,6 @@ jobs:
       matrix:
         crystal-version:
           - latest
-          - '0.29.0'
           - '0.35.1'
 
     runs-on: ubuntu-latest
