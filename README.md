@@ -1,8 +1,8 @@
-# i18n
+# i18n - Internationalization Library for Crystal
 
 ![Build Status](https://github.com/crimson-knight/i18n.cr/actions/workflows/ci.yml/badge.svg)
-
-Internationalization API
+![license](https://img.shields.io/github/license/crimson-knight/i18n.cr)
+![tag](https://img.shields.io/github/v/tag/crimson-knight/i18n.cr?sort=semver)
 
 ## Changes from 0.4.0 to 0.4.1
 - Supported Crystal versions of >= 0.35
