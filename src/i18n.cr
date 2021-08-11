@@ -3,6 +3,8 @@ require "./i18n/*"
 module I18n
   extend self
 
+  VERSION = "0.4.1"
+
   macro define_delegators(names)
     {% for name in names %}
       def {{name.id}}

@@ -2,19 +2,20 @@ require "../spec_helper"
 
 describe I18n::Backend::Yaml do
   backend = I18n::Backend::Yaml.new
-  locales = %w(spec/locales spec/locales/subfolder)
+  locales = %w(spec/locales/common spec/locales/common/subfolder)
   locales.each { |path| backend.load(path) }
 
   describe "%embed" do
     it "embeds files from given folder" do
       with_blank_translations do
-        I18n.backend.translations.clear
-        I18n.backend.translations.should be_empty
+        local_backend = I18n.backend.as(I18n::Backend::Yaml)
+        local_backend.translations.clear
+        local_backend.translations.should be_empty
 
-        I18n::Backend::Yaml.embed(["spec/locales/subfolder"])
+        I18n::Backend::Yaml.embed(["spec/locales/common/subfolder"])
 
-        I18n.backend.translations["en"].has_key?("subfolder_message").should be_true
-        I18n.backend.translations["en"].has_key?("new_message").should be_false
+        local_backend.translations["en"].has_key?("subfolder_message").should be_true
+        local_backend.translations["en"].has_key?("new_message").should be_false
       end
     end
   end
@@ -27,6 +28,19 @@ describe I18n::Backend::Yaml do
 
     it "loads all available languages" do
       backend.available_locales.sort.should eq(%w(en pt ru))
+    end
+
+    it "loads specified file path" do
+      local_backend = I18n::Backend::Yaml.new
+      local_backend.load("spec/locales/common/en.yml")
+      local_backend.available_locales.should eq(%w(en))
+    end
+
+    it "loads json file" do
+      local_backend = I18n::Backend::Yaml.new
+      local_backend.load("spec/locales/common/uk.json")
+      local_backend.available_locales.should eq(%w(uk))
+      local_backend.translate("uk", "new_message", count: 2).should eq("у вас 2 повідомлення")
     end
   end
 
@@ -63,6 +77,7 @@ describe I18n::Backend::Yaml do
     it { backend.exists?("en", "messages.with_2_arguments").should be_true }
     it { backend.exists?("pt", "hello").should be_true }
     it { backend.exists?("en", "hello").should be_false }
+    it { backend.exists?("au", "hello").should be_false }
 
     context "with pluralization" do
       it { backend.exists?("pt", "new_message", 1).should be_true }

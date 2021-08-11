@@ -1,7 +1,8 @@
 require "spec"
 require "../src/i18n"
+require "../src/i18n/backend/chain"
 
-I18n.load_path += %w(spec/**)
+I18n.load_path += %w(spec/locales/common/**)
 I18n.init
 
 Spec.before_each { I18n.locale = "pt" }
