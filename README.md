@@ -4,27 +4,6 @@
 ![license](https://img.shields.io/github/license/crimson-knight/i18n.cr)
 ![tag](https://img.shields.io/github/v/tag/crimson-knight/i18n.cr?sort=semver)
 
-## Changes from 0.4.0 to 0.4.1
-- Supported Crystal versions of >= 0.35
-- add Backend::Yaml#exists? to check whether given translation key exists
-- add I18n.exists?
-- add docs to I18n module public methods (most of wording was taken from the ruby I18n repo)
-- Fixed the iter argument in `translate` to properly return the correct index
-
-Example
-```crystal
-  # Array we are looking into ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-  I18n.translate("__formats__.date.day_names", iter: 2) # Returns "Wednesday"
-```
-
-
-## Breaking changes from 0.3 to 0.4
-- Pluralization rules are now fully suites [CLDR convention](http://cldr.unicode.org/index/cldr-spec/plural-rules). Specifically `en` pluralization no more returns `zero`
-
-## Breaking changes from 0.2 to 0.3
-- The first day of the week is now Monday according to ISO 8601.
-- The nil value in `month_names` and `abbr_month_names` was removed.
-
 ## Installation
 
 Add this to your application's `shard.yml`:
@@ -37,21 +16,21 @@ dependencies:
 
 ## Usage
 
-``` crystal
+```crystal
 I18n.translate(
-    "some.dot.separated.path",  # key : String
-    {attr_to_interpolate: "a"}, # options : Hash | NamedTuple? = nil
-    "pt",                       # force_locale : String = nil
-    2,                          # count : Numeric? = nil
-    "default translation",      # default : String? = nil
-    nil                         # iter : Int? = nil
+  "some.dot.separated.path",  # key : String
+  {attr_to_interpolate: "a"}, # options : Hash | NamedTuple? = nil
+  "pt",                       # force_locale : String = nil
+  2,                          # count : Numeric? = nil
+  "default translation",      # default : String? = nil
+  nil                         # iter : Int? = nil
 )
 
 I18n.localize(
-    Time.utc_now, # object : _
-    "pt",         # force_locale : String = I18n.config.locale
-    :time,        # scope : Symbol? = :number
-    "long"        # format : String? = nil
+  Time.utc_now, # object : _
+  "pt",         # force_locale : String = I18n.config.locale
+  :time,        # scope : Symbol? = :number
+  "long"        # format : String? = nil
 )
 ```
 
@@ -90,6 +69,33 @@ I18n.default_locale = "pt" # default can be set after loading translations
 
 There is a [handler](https://github.com/TechMagister/kemalyst-i18n) for Kemalyst that bring I18n configuration.
 
+### Available backends
+
+#### I18n::Backend::Yaml
+
+A simple backend that reads translations from YAML files and stores them in an in-memory hash. Also supports JSON files and translations embedding.
+
+#### I18n::Backend::Chain
+
+Backend that chains multiple other backends and checks each of them when a translation needs to be looked up. This is useful when you want to use standard translations with a custom backend to store custom application translations in a database or other backends.
+
+To use the Chain backend instantiate it and set it to the I18n module. You can add chained backends through the initializer:
+
+```crystal
+require "i18n/backend/chain"
+
+other_backend = I18n::Backend::Yaml.new # your other backend
+I18n.backend.load("config/locales/en.yml")
+other_backend.load("config/locales/pl.yml")
+I18n.backend = I18n::Backend::Chain.new([I18n.backend, other_backend2] of I18n::Backend::Base)
+
+# or if it is ok to pass files to each backend
+
+I18n.backend = I18n::Backend::Chain.new([I18n.backend, I18n::Backend::Yaml.new] of I18n::Backend::Base)
+I18n.load_path = ["config/locales/{en,pl}.yml"]
+I18n.load
+```
+
 ### Note on YAML Backend
 
 Putting translations for all parts of your application in one file per locale could be hard to manage. You can store these files in a hierarchy which makes sense to you.
@@ -111,6 +117,8 @@ locales
 ```
 
 This way you can separate model related translations from the view ones. To require all described subfolders at once use `**` - `I18n.load_path += ["locals/**/"]`
+
+Any `.json` file located in the file hierarchy specified for `load_path` is also read and parsed.
 
 #### Date/Time Formats
 
@@ -244,18 +252,31 @@ I18n.translate("__formats__.date.day_names", iter: 2)  # >>> "Wednesday"
 
 ### Embedding translations inside your binary
 
+## Changes from 0.4.0 to 0.4.1
+- Supported Crystal versions of >= 0.35
+- add Backend::Yaml#exists? to check whether given translation key exists
+- add I18n.exists?
+- add docs to I18n module public methods (most of wording was taken from the ruby I18n repo)
+- Fixed the iter argument in `translate` to properly return the correct index
+
+Example
+```crystal
+  # Array we are looking into ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  I18n.translate("__formats__.date.day_names", iter: 2) # Returns "Wednesday"
+```
+
+## Breaking changes from 0.3 to 0.4
+- Pluralization rules are now fully suites [CLDR convention](http://cldr.unicode.org/index/cldr-spec/plural-rules). Specifically `en` pluralization no more returns `zero`
+
+## Breaking changes from 0.2 to 0.3
+- The first day of the week is now Monday according to ISO 8601.
+- The nil value in `month_names` and `abbr_month_names` was removed.
+
 You can embed translations inside your binary by using the following macro call:
 
 ```crystal
 I18n::Backend::Yaml.embed(["some/locale/directory", "some/other/locale/directory"])
 ```
-
-## Development
-
-TODO :
-
-- [ ] Add more backends ( Database, json based, ruby based ( why not ? ))
-- [ ] others ( there is always something to add ... or remove )
 
 ## Contributing
 

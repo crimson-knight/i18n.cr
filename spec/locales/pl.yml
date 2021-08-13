@@ -1,0 +1,31 @@
+thanks: Dziękuję
+hello: cześć
+new_message:
+    one: masz %{count} wiadomośćу
+    few: masz %{count} wiadomości
+    many: masz %{count} wiadomości
+    other: masz %{count} wiadomości
+__formats__:
+    number:
+        decimal_separator: '.'
+        precision_separator: ','
+
+    currency:
+        symbol: 'zł'
+        name: 'złoty'
+        format: '%{amount}zł'
+
+    date:
+        formats:
+            default: "%d.%m.%Y"
+            long: "%A, %d %B %Y"
+
+        month_names: [Styczeń, Luty, Marzec, Kwiecień, Maj, Czerwiec, Lipiec, Sierpień, Wrzesień, Październik, Listopad, Grudzień]
+        abbr_month_names: [Stycz, Luty, Mar, Kwiec, Maj, Czerw, Lip, Sierp, Wrzes, Pazdz, Listop, Grudz]
+
+        day_names: [poniedziałek, wtorek, środa, czwartek, piątek, sobota, niedziela]
+        abbr_day_names: [pn, wt, śr, cz, pt, sob, niedz]
+
+    time:
+        formats:
+            default: "%I:%M:%S"

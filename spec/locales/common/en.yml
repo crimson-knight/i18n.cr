@@ -31,4 +31,4 @@ __formats__:
 
     time:
         formats:
-            default: "%I:%M:%S %p"
+            default: "%I:%M:%S"
