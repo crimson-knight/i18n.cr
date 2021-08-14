@@ -21,13 +21,15 @@ module I18n
 
       # Read files, normalize and merge all the translations
       def load(*args)
-        if args[0].is_a?(String)
-          extension = File.extname(args[0])
-          pattern = extension.empty? ? File.join(args[0], "*.yml") : args[0]
+        args.each do |arg|
+          if arg.is_a?(String)
+            extension = File.extname(arg)
+            pattern = extension.empty? ? File.join(arg, "*.yml") : arg
 
-          Dir.glob(pattern).each { |file| load_file(file) }
-        else
-          raise ArgumentError.new("First argument should be a filename")
+            Dir.glob(pattern).each { |file| load_file(file) }
+          else
+            raise ArgumentError.new("First argument should be a filename")
+          end
         end
       end
 
@@ -76,7 +78,7 @@ module I18n
       # Flatten paths
       def self.normalize(data : YAML::Any, path : String = "", final = Hash(String, YAML::Any).new)
         data.as_h.keys.each do |k|
-          newp = path.size == 0 ? k.to_s : path + "." + k.to_s
+          newp = path.size == 0 ? k.to_s : "#{path}.#{k}"
           newdata = data[k]
 
           if newdata.as_h?

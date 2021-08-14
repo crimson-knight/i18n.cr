@@ -1,6 +1,7 @@
 require "spec"
 require "../src/i18n"
 require "../src/i18n/backend/chain"
+require "../src/i18n/backend/fallback"
 
 I18n.load_path += %w(spec/locales/common/**)
 I18n.init

@@ -1,0 +1,13 @@
+hello: hey
+new_message:
+    one: 'you have got a message'
+    other: 'you have got %{count} new messages'
+__formats__:
+    currency:
+        symbol: '$'
+        name: 'dollar'
+        format: '%{amount}$'
+
+    date:
+        formats:
+            default: "%m/%d/%Y"

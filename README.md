@@ -96,6 +96,20 @@ I18n.load_path = ["config/locales/{en,pl}.yml"]
 I18n.load
 ```
 
+#### I18n::Backend::Fallback
+
+I18n locale fallbacks are useful when you want your application to use translations from other locales when translations for the current locale are missing. E.g. you might want to use `en` translations when translations in your applications main locale `de` are missing.
+
+To enable locale fallbacks you can instantiate fallback backend giving it your backend as an argument:
+
+```crystal
+require "i18n/backend/fallback"
+
+I18n.load_path = ["config/locales"]
+I18n.init
+I18n.backend = I18n::Backend::Fallback.new(I18n.backend, {"en-US" => "en", "en-UK" => "en"})
+```
+
 ### Note on YAML Backend
 
 Putting translations for all parts of your application in one file per locale could be hard to manage. You can store these files in a hierarchy which makes sense to you.
