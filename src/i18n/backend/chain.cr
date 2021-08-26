@@ -12,7 +12,7 @@ module I18n
       end
 
       def load(*args)
-        backends.each(&.load(args[0]))
+        backends.each(&.load(*args))
       end
 
       def translate!(locale : String, key : String, options : Hash | NamedTuple?, count = nil, default = nil, iter = nil) : String
